@@ -1,8 +1,8 @@
 # Pine
 
-Pine is a lightweight JavaScript AST Parser, for Node.js.
+Pine is a lightweight JavaScript AST Parser for Node.js.
 
-Initially created to power Colony's JavaScript -> C# class transpiler, Pine currently supports only a subset of JavaScript syntax neccasary for the evaluation of class "getter" functions, the content of which can be explicity understood in C#.
+Initially created to power Colony's JavaScript to C# class transpiler, Pine currently supports only a subset of JavaScript syntax neccasary for the evaluation of class "getter" functions, the content of which can be explicity understood in C#.
 
 The following syntax is currently supported:
 

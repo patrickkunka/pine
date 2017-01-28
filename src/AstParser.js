@@ -157,4 +157,7 @@ class AstParser {
     }
 }
 
+AstParser.Models = Models;
+AstParser.Patterns = Patterns;
+
 export default AstParser;

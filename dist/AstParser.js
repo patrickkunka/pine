@@ -178,5 +178,8 @@ class AstParser {
     }
 }
 
+AstParser.Models = _Models2.default;
+AstParser.Patterns = _Patterns2.default;
+
 exports.default = AstParser;
 //# sourceMappingURL=AstParser.js.map

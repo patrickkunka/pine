@@ -34,3 +34,7 @@ const program = Pine.parse(programString);
 ```
 
 The above example returns an instance of `Program` which can be considered the AST root.
+
+## Requirements
+
+Node >= 7

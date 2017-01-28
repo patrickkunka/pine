@@ -16,7 +16,6 @@
     "chai-shallow-deep-equal": "^1.4.0",
     "coveralls": "^2.11.14",
     "mocha": "^3.0.2",
-    "mocha-lcov-reporter": "^1.2.0",
-    "morgan": "^1.7.0"
+    "mocha-lcov-reporter": "^1.2.0"
   }
 }

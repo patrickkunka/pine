@@ -5,17 +5,13 @@ class NewExpression extends Token {
         super();
 
         this.identifier = null;
-        this.arrayItemIdentifier = null;
+        this.typing = null;
 
         Object.seal(this);
     }
 
     toString() {
         return 'new_expression';
-    }
-
-    get isArray() {
-        return this.arrayItemIdentifier !== null;
     }
 }
 

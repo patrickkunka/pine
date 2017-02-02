@@ -15,17 +15,13 @@ class NewExpression extends _Token2.default {
         super();
 
         this.identifier = null;
-        this.arrayItemIdentifier = null;
+        this.typing = null;
 
         Object.seal(this);
     }
 
     toString() {
         return 'new_expression';
-    }
-
-    get isArray() {
-        return this.arrayItemIdentifier !== null;
     }
 }
 

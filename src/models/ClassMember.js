@@ -8,8 +8,8 @@ class ClassMember extends Token {
         this.value          = null;
         this.getter         = null;
         this.setter         = null;
-        this.typing         = '';
-        this.arrayTyping    = '';
+        this.typing         = null;
+        this.arrayTyping    = null;
 
         /**
          * @type ('init'|'get')
@@ -22,30 +22,6 @@ class ClassMember extends Token {
 
     get hasGetter() {
         return this.getter !== null;
-    }
-
-    get isString() {
-        return this.typing === 'string';
-    }
-
-    get isBoolean() {
-        return this.typing === 'boolean';
-    }
-
-    get isNumber() {
-        return this.typing === 'number';
-    }
-
-    get isPlainObject() {
-        return this.typing === 'object';
-    }
-
-    get isArray() {
-        return this.typing === 'array';
-    }
-
-    get isCustomType() {
-        return !this.isString && !this.isBoolean && !this.isNumber && !this.isPlainObject && !this.isArray;
     }
 }
 

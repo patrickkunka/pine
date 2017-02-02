@@ -60,11 +60,11 @@ class MemberExpression extends _Token2.default {
     }
 
     get isArray() {
-        return this.isClassMember && this.classMember.isArray;
+        return this.isClassMember && this.classMember.typing.isArray;
     }
 
     get isString() {
-        return this.isClassMember && this.classMember.isString;
+        return this.isClassMember && this.classMember.typing.isString;
     }
 }
 

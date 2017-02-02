@@ -47,11 +47,11 @@ class MemberExpression extends Token {
     }
 
     get isArray() {
-        return this.isClassMember && this.classMember.isArray;
+        return this.isClassMember && this.classMember.typing.isArray;
     }
 
     get isString() {
-        return this.isClassMember && this.classMember.isString;
+        return this.isClassMember && this.classMember.typing.isString;
     }
 }
 

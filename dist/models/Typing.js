@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 class Typing {
     constructor() {
         this.kind = '';
+        this.arrayTyping = null;
     }
 
     toString() {

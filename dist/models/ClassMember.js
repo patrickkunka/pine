@@ -19,7 +19,6 @@ class ClassMember extends _Token2.default {
         this.getter = null;
         this.setter = null;
         this.typing = null;
-        this.arrayTyping = null;
 
         /**
          * @type ('init'|'get')

@@ -9,7 +9,6 @@ class ClassMember extends Token {
         this.getter         = null;
         this.setter         = null;
         this.typing         = null;
-        this.arrayTyping    = null;
 
         /**
          * @type ('init'|'get')

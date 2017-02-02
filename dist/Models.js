@@ -80,6 +80,10 @@ var _ReturnStatement = require('./models/ReturnStatement');
 
 var _ReturnStatement2 = _interopRequireDefault(_ReturnStatement);
 
+var _Typing = require('./models/Typing');
+
+var _Typing2 = _interopRequireDefault(_Typing);
+
 var _UnaryExpression = require('./models/UnaryExpression');
 
 var _UnaryExpression2 = _interopRequireDefault(_UnaryExpression);
@@ -114,6 +118,7 @@ exports.default = {
     Program: _Program2.default,
     Punctuator: _Punctuator2.default,
     ReturnStatement: _ReturnStatement2.default,
+    Typing: _Typing2.default,
     UnaryExpression: _UnaryExpression2.default,
     VariableDeclaration: _VariableDeclaration2.default,
     Whitespace: _Whitespace2.default

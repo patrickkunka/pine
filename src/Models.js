@@ -17,6 +17,7 @@ import ParametersExpression from './models/ParametersExpression';
 import Program              from './models/Program';
 import Punctuator           from './models/Punctuator';
 import ReturnStatement      from './models/ReturnStatement';
+import Typing               from './models/Typing';
 import UnaryExpression      from './models/UnaryExpression';
 import VariableDeclaration  from './models/VariableDeclaration';
 import Whitespace           from './models/Whitespace';
@@ -41,6 +42,7 @@ export default {
     Program,
     Punctuator,
     ReturnStatement,
+    Typing,
     UnaryExpression,
     VariableDeclaration,
     Whitespace

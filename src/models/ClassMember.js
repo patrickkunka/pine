@@ -25,6 +25,8 @@ class ClassMember extends Token {
 
     get isMemberNameReservedWord() {
         return [
+            // .Net v1.1
+
             'abstract', 'as', 'base', 'bool', 'break', 'byte',
             'case', 'catch', 'char', 'checked', 'class', 'const',
             'continue', 'decimal', 'default', 'delegate', 'do', 'double',
@@ -37,7 +39,16 @@ class ClassMember extends Token {
             'short', 'sizeof', 'stackalloc', 'static', 'string', 'struct',
             'switch', 'this', 'throw', 'try', 'typeof', 'unit',
             'ulong', 'unchecked', 'unsafe', 'ushort', 'using', 'virtual',
-            'void', 'volatile', 'while', 'FALSE', 'TRUE'
+            'void', 'volatile', 'while', 'FALSE', 'TRUE',
+
+            // .Net v2.0
+
+            'yield',
+            'by', 'descending', 'from', 'group', 'into', 'orderby',
+
+            // .Net v3.0
+
+            'select', 'var', 'wher'
         ].indexOf(this.key) > -1;
     }
 }

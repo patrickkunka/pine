@@ -46,7 +46,7 @@ class Mappings {
         keyword.end = startIndex + captured.length;
 
         if (_Entities2.default.KEYWORDS.indexOf(captured) < 0) {
-            throw new Error(`[mappings] Illegal token ${ captured }`);
+            throw new Error(`[mappings] Illegal token ${captured}`);
         }
 
         return keyword;
@@ -136,7 +136,7 @@ class Mappings {
 
             if (i === 0) {
                 if (tokenString !== 'identifier' && parent) {
-                    throw new Error(`[mapper#mapMemberExpression] Illegal token ${ tokenString }`);
+                    throw new Error(`[mapper#mapMemberExpression] Illegal token ${tokenString}`);
                 }
 
                 memberExpression.object = token;

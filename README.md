@@ -40,4 +40,4 @@ The above example returns an instance of `Program` which can be considered the A
 Node >= 7
 
 ---
-*&copy; Patrick Kunka / KunkaLabs Ltd 2017*
+*&copy; 2017 Patrick Kunka / KunkaLabs Ltd*

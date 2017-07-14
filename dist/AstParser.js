@@ -8,21 +8,23 @@ var _Util = require('./Util');
 
 var _Util2 = _interopRequireDefault(_Util);
 
-var _Models = require('./Models');
+var _models = require('./models');
 
-var _Models2 = _interopRequireDefault(_Models);
+var models = _interopRequireWildcard(_models);
+
+var _Patterns = require('./Patterns');
+
+var patterns = _interopRequireWildcard(_Patterns);
 
 var _Mappings = require('./Mappings');
 
 var _Mappings2 = _interopRequireDefault(_Mappings);
 
-var _Patterns = require('./Patterns');
-
-var _Patterns2 = _interopRequireDefault(_Patterns);
-
 var _flow = require('./flow.json');
 
 var _flow2 = _interopRequireDefault(_flow);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34,7 +36,7 @@ class AstParser {
      */
 
     static parse(programString, classInstance = null) {
-        const Program = new _Models2.default.Program();
+        const Program = new models.Program();
         const tokens = AstParser.ingestProgramString(programString);
 
         AstParser.parseTokensIntoAst(tokens, classInstance);
@@ -56,7 +58,7 @@ class AstParser {
         let token = null;
 
         while (token = AstParser.matchToken(programString, startIndex)) {
-            if (!(token instanceof _Models2.default.Whitespace)) {
+            if (!(token instanceof models.Whitespace)) {
                 tokens.push(token);
             }
 
@@ -83,19 +85,19 @@ class AstParser {
 
         let match = null;
 
-        if (match = new RegExp(_Patterns2.default.BOOLEAN).exec(slice)) {
+        if (match = new RegExp(patterns.BOOLEAN).exec(slice)) {
             return _Mappings2.default.getLiteral(match, startIndex, 'boolean');
-        }if (match = new RegExp(_Patterns2.default.NUMBER).exec(slice)) {
+        }if (match = new RegExp(patterns.NUMBER).exec(slice)) {
             return _Mappings2.default.getLiteral(match, startIndex, 'number');
-        } else if (match = new RegExp(_Patterns2.default.KEYWORD).exec(slice)) {
+        } else if (match = new RegExp(patterns.KEYWORD).exec(slice)) {
             return _Mappings2.default.getKeyword(match, startIndex);
-        } else if (match = new RegExp(_Patterns2.default.PUNCTUATOR).exec(slice)) {
+        } else if (match = new RegExp(patterns.PUNCTUATOR).exec(slice)) {
             return _Mappings2.default.getPunctuator(match, startIndex);
-        } else if (match = new RegExp(_Patterns2.default.STRING).exec(slice)) {
+        } else if (match = new RegExp(patterns.STRING).exec(slice)) {
             return _Mappings2.default.getLiteral(match, startIndex, 'string');
-        } else if (match = new RegExp(_Patterns2.default.IDENTIFIER).exec(slice)) {
+        } else if (match = new RegExp(patterns.IDENTIFIER).exec(slice)) {
             return _Mappings2.default.getIdentifier(match, startIndex);
-        } else if (match = new RegExp(_Patterns2.default.WHITESPACE).exec(slice)) {
+        } else if (match = new RegExp(patterns.WHITESPACE).exec(slice)) {
             return _Mappings2.default.getWhitespace(match, startIndex);
         }
 
@@ -112,9 +114,9 @@ class AstParser {
         for (let i = 0, type; i < _flow2.default.length; i++) {
             type = _flow2.default[i];
 
-            let Model = _Models2.default[_Util2.default.pascalCase(type)];
+            let Model = models[_Util2.default.pascalCase(type)];
             let mapper = _Mappings2.default['map' + _Util2.default.pascalCase(type)];
-            let pattern = _Patterns2.default[type];
+            let pattern = patterns[type];
 
             AstParser.traverseTokens(tokens, Model, mapper, pattern, classInstance);
         }
@@ -178,8 +180,8 @@ class AstParser {
     }
 }
 
-AstParser.Models = _Models2.default;
-AstParser.Patterns = _Patterns2.default;
+AstParser.Models = models;
+AstParser.Patterns = patterns;
 
 exports.default = AstParser;
 //# sourceMappingURL=AstParser.js.map

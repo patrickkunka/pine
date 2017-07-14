@@ -4,23 +4,21 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _Patterns = require('./Patterns');
+var _patterns = require('./patterns');
 
-var _Patterns2 = _interopRequireDefault(_Patterns);
+var patterns = _interopRequireWildcard(_patterns);
 
-var _Models = require('./Models');
+var _models = require('./models');
 
-var _Models2 = _interopRequireDefault(_Models);
+var models = _interopRequireWildcard(_models);
 
 var _Entities = require('./Entities');
 
-var _Entities2 = _interopRequireDefault(_Entities);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 class Mappings {
     static getLiteral(match, startIndex, type) {
-        const literal = new _Models2.default.Literal();
+        const literal = new models.Literal();
         const captured = match[1];
 
         literal.kind = type;
@@ -38,14 +36,14 @@ class Mappings {
     }
 
     static getKeyword(match, startIndex) {
-        const keyword = new _Models2.default.Keyword();
+        const keyword = new models.Keyword();
         const captured = match[1];
 
         keyword.content = captured;
         keyword.start = startIndex;
         keyword.end = startIndex + captured.length;
 
-        if (_Entities2.default.KEYWORDS.indexOf(captured) < 0) {
+        if (_Entities.KEYWORDS.indexOf(captured) < 0) {
             throw new Error(`[mappings] Illegal token ${captured}`);
         }
 
@@ -53,7 +51,7 @@ class Mappings {
     }
 
     static getIdentifier(match, startIndex) {
-        const identifier = new _Models2.default.Identifier();
+        const identifier = new models.Identifier();
         const captured = match[1];
 
         identifier.content = captured;
@@ -64,7 +62,7 @@ class Mappings {
     }
 
     static getWhitespace(match, startIndex) {
-        const whitespace = new _Models2.default.Whitespace();
+        const whitespace = new models.Whitespace();
         const captured = match[1];
 
         whitespace.content = captured;
@@ -75,7 +73,7 @@ class Mappings {
     }
 
     static getPunctuator(match, startIndex) {
-        const punctuator = new _Models2.default.Punctuator();
+        const punctuator = new models.Punctuator();
         const captured = match[1];
 
         punctuator.content = captured;
@@ -126,7 +124,7 @@ class Mappings {
         for (i = 0; i <= 2; i++) {
             let token = segment[i];
             let tokenString = token.toString();
-            let re = new RegExp('^' + _Patterns2.default.MEMBER_EXPRESSION);
+            let re = new RegExp('^' + patterns.MEMBER_EXPRESSION);
 
             if (tokenString === '.') continue;
 
@@ -144,7 +142,7 @@ class Mappings {
                 let segmentString = tokens.slice(startIndex + i).join(' ');
 
                 if (re.test(segmentString)) {
-                    memberExpression.property = new _Models2.default.MemberExpression();
+                    memberExpression.property = new models.MemberExpression();
 
                     Mappings.mapMemberExpression(memberExpression.property, tokens, startIndex + i, memberExpression);
                 } else {

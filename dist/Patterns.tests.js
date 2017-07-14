@@ -2,11 +2,11 @@
 
 var _Patterns = require('./Patterns');
 
-var _Patterns2 = _interopRequireDefault(_Patterns);
+var patterns = _interopRequireWildcard(_Patterns);
 
 var _chai = require('chai');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 describe('Patterns', () => {
     // /^("([^"\n\\]|\\")*"|'([^'\n\\]|\\')*')/
@@ -14,7 +14,7 @@ describe('Patterns', () => {
     describe('#STRING', () => {
         it('should recognise a string literal wrapped in double quotes', () => {
             const code = '"foo"';
-            const re = new RegExp(_Patterns2.default.STRING);
+            const re = new RegExp(patterns.STRING);
             const match = re.exec(code);
 
             _chai.assert.isOk(re);
@@ -23,7 +23,7 @@ describe('Patterns', () => {
 
         it('should recognise a string literal wrapped in single quotes', () => {
             const code = "'foo'"; // eslint-disable-line quotes
-            const re = new RegExp(_Patterns2.default.STRING);
+            const re = new RegExp(patterns.STRING);
             const match = re.exec(code);
 
             _chai.assert.isOk(re);
@@ -32,7 +32,7 @@ describe('Patterns', () => {
 
         it('should recognise an empty string literal', () => {
             const code = '""';
-            const re = new RegExp(_Patterns2.default.STRING);
+            const re = new RegExp(patterns.STRING);
             const match = re.exec(code);
 
             _chai.assert.isOk(re);
@@ -41,7 +41,7 @@ describe('Patterns', () => {
 
         it('should recognise a string literal containing varied characters', () => {
             const code = '"Lorem ipsum sit dolor 12345. Hello world!"';
-            const re = new RegExp(_Patterns2.default.STRING);
+            const re = new RegExp(patterns.STRING);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -50,7 +50,7 @@ describe('Patterns', () => {
 
         it('should recognise a string literal containing escaped quotes', () => {
             const code = '"Lorem ipsum \\"sit\\" dolor"';
-            const re = new RegExp(_Patterns2.default.STRING);
+            const re = new RegExp(patterns.STRING);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -59,7 +59,7 @@ describe('Patterns', () => {
 
         it('should not recognise a string literal starting with an escaped quote', () => {
             const code = '\\"Lorem ipsum\\"';
-            const re = new RegExp(_Patterns2.default.STRING);
+            const re = new RegExp(patterns.STRING);
             const match = re.exec(code);
 
             _chai.assert.isNotOk(match);
@@ -67,7 +67,7 @@ describe('Patterns', () => {
 
         it('should only match the first string of multiple', () => {
             const code = '"Lorem ipsum" === "Sit dolor"';
-            const re = new RegExp(_Patterns2.default.STRING);
+            const re = new RegExp(patterns.STRING);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -80,7 +80,7 @@ describe('Patterns', () => {
     describe('#BOOLEAN', () => {
         it('should recognise a `true` boolean', () => {
             const code = 'true';
-            const re = new RegExp(_Patterns2.default.BOOLEAN);
+            const re = new RegExp(patterns.BOOLEAN);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -89,7 +89,7 @@ describe('Patterns', () => {
 
         it('should recognise a `false` boolean', () => {
             const code = 'false';
-            const re = new RegExp(_Patterns2.default.BOOLEAN);
+            const re = new RegExp(patterns.BOOLEAN);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -98,7 +98,7 @@ describe('Patterns', () => {
 
         it('should recognise a boolean followed by a ";"', () => {
             const code = 'false;';
-            const re = new RegExp(_Patterns2.default.BOOLEAN);
+            const re = new RegExp(patterns.BOOLEAN);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -107,7 +107,7 @@ describe('Patterns', () => {
 
         it('should recognise a boolean followed by a ")"', () => {
             const code = 'false)';
-            const re = new RegExp(_Patterns2.default.BOOLEAN);
+            const re = new RegExp(patterns.BOOLEAN);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -116,7 +116,7 @@ describe('Patterns', () => {
 
         it('should recognise a boolean followed by a ","', () => {
             const code = 'false,';
-            const re = new RegExp(_Patterns2.default.BOOLEAN);
+            const re = new RegExp(patterns.BOOLEAN);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -125,7 +125,7 @@ describe('Patterns', () => {
 
         it('should not recognise a sequence of characters starting with the word `true`', () => {
             const code = 'truent';
-            const re = new RegExp(_Patterns2.default.BOOLEAN);
+            const re = new RegExp(patterns.BOOLEAN);
             const match = re.exec(code);
 
             _chai.assert.isNotOk(match);
@@ -133,7 +133,7 @@ describe('Patterns', () => {
 
         it('should not recognise a sequence of characters ending with the word `true`', () => {
             const code = 'isUntrue';
-            const re = new RegExp(_Patterns2.default.BOOLEAN);
+            const re = new RegExp(patterns.BOOLEAN);
             const match = re.exec(code);
 
             _chai.assert.isNotOk(match);
@@ -141,7 +141,7 @@ describe('Patterns', () => {
 
         it('should not recognise a sequence of characters starting with the word `false`', () => {
             const code = 'falsetto';
-            const re = new RegExp(_Patterns2.default.BOOLEAN);
+            const re = new RegExp(patterns.BOOLEAN);
             const match = re.exec(code);
 
             _chai.assert.isNotOk(match);
@@ -149,7 +149,7 @@ describe('Patterns', () => {
 
         it('should not recognise a sequence of characters ending with the word `false`', () => {
             const code = 'isUnfalse';
-            const re = new RegExp(_Patterns2.default.BOOLEAN);
+            const re = new RegExp(patterns.BOOLEAN);
             const match = re.exec(code);
 
             _chai.assert.isNotOk(match);
@@ -161,7 +161,7 @@ describe('Patterns', () => {
     describe('#PUNCTUATOR', () => {
         it('should recognise a `-` punctuator', () => {
             const code = '-';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -170,7 +170,7 @@ describe('Patterns', () => {
 
         it('should recognise a `.` punctuator', () => {
             const code = '.';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -179,7 +179,7 @@ describe('Patterns', () => {
 
         it('should recognise a `,` punctuator', () => {
             const code = ',';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -188,7 +188,7 @@ describe('Patterns', () => {
 
         it('should recognise a `:` punctuator', () => {
             const code = ':';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -197,7 +197,7 @@ describe('Patterns', () => {
 
         it('should recognise a `;` punctuator', () => {
             const code = ';';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -206,7 +206,7 @@ describe('Patterns', () => {
 
         it('should recognise a `!` punctuator', () => {
             const code = '!';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -215,7 +215,7 @@ describe('Patterns', () => {
 
         it('should recognise a `+` punctuator', () => {
             const code = '+';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -224,7 +224,7 @@ describe('Patterns', () => {
 
         it('should recognise a `=` punctuator', () => {
             const code = '=';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -233,7 +233,7 @@ describe('Patterns', () => {
 
         it('should not recognise a bitwise `|` punctuator', () => {
             const code = '|';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isNotOk(match);
@@ -241,7 +241,7 @@ describe('Patterns', () => {
 
         it('should not recognise a bitwise `&` punctuator', () => {
             const code = '&';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isNotOk(match);
@@ -249,7 +249,7 @@ describe('Patterns', () => {
 
         it('should recognise a `<` punctuator', () => {
             const code = '<';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -258,7 +258,7 @@ describe('Patterns', () => {
 
         it('should recognise a `>` punctuator', () => {
             const code = '>';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -267,7 +267,7 @@ describe('Patterns', () => {
 
         it('should recognise a `{` punctuator', () => {
             const code = '{';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -276,7 +276,7 @@ describe('Patterns', () => {
 
         it('should recognise a `}` punctuator', () => {
             const code = '}';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -285,7 +285,7 @@ describe('Patterns', () => {
 
         it('should recognise a `[` punctuator', () => {
             const code = '[';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -294,7 +294,7 @@ describe('Patterns', () => {
 
         it('should recognise a `]` punctuator', () => {
             const code = ']';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -303,7 +303,7 @@ describe('Patterns', () => {
 
         it('should recognise a `(` punctuator', () => {
             const code = '(';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -312,7 +312,7 @@ describe('Patterns', () => {
 
         it('should recognise a `)` punctuator', () => {
             const code = ')';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -321,7 +321,7 @@ describe('Patterns', () => {
 
         it('should recognise a `&&` punctuator', () => {
             const code = '&&';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -330,7 +330,7 @@ describe('Patterns', () => {
 
         it('should recognise a `||` punctuator', () => {
             const code = '||';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -339,7 +339,7 @@ describe('Patterns', () => {
 
         it('should recognise a `==` punctuator', () => {
             const code = '==';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -348,7 +348,7 @@ describe('Patterns', () => {
 
         it('should recognise a `!=` punctuator', () => {
             const code = '!=';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -357,7 +357,7 @@ describe('Patterns', () => {
 
         it('should recognise a `!==` punctuator', () => {
             const code = '!==';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -366,7 +366,7 @@ describe('Patterns', () => {
 
         it('should recognise a `++` punctuator', () => {
             const code = '++';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -375,7 +375,7 @@ describe('Patterns', () => {
 
         it('should recognise a `--` punctuator', () => {
             const code = '--';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -384,7 +384,7 @@ describe('Patterns', () => {
 
         it('should recognise a `<=` punctuator', () => {
             const code = '<=';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -393,7 +393,7 @@ describe('Patterns', () => {
 
         it('should recognise a `>=` punctuator', () => {
             const code = '>=';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -402,7 +402,7 @@ describe('Patterns', () => {
 
         it('should should only match the first valid character(s) of arbitrary collections of punctuators', () => {
             const code = '("';
-            const re = new RegExp(_Patterns2.default.PUNCTUATOR);
+            const re = new RegExp(patterns.PUNCTUATOR);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -416,7 +416,7 @@ describe('Patterns', () => {
     describe('#IDENTIFIER', () => {
         it('should recognise a variable identifier', () => {
             const code = 'foo';
-            const re = new RegExp(_Patterns2.default.IDENTIFIER);
+            const re = new RegExp(patterns.IDENTIFIER);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -425,7 +425,7 @@ describe('Patterns', () => {
 
         it('should recognise a camel cased variable identifier', () => {
             const code = 'isFoo';
-            const re = new RegExp(_Patterns2.default.IDENTIFIER);
+            const re = new RegExp(patterns.IDENTIFIER);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -434,7 +434,7 @@ describe('Patterns', () => {
 
         it('should recognise a pascal cased variable identifier', () => {
             const code = 'FooModel';
-            const re = new RegExp(_Patterns2.default.IDENTIFIER);
+            const re = new RegExp(patterns.IDENTIFIER);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -443,7 +443,7 @@ describe('Patterns', () => {
 
         it('should recognise a variable identifier containing a number', () => {
             const code = 'FooModel0';
-            const re = new RegExp(_Patterns2.default.IDENTIFIER);
+            const re = new RegExp(patterns.IDENTIFIER);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -452,7 +452,7 @@ describe('Patterns', () => {
 
         it('should not recognise a variable identifier starting with a number', () => {
             const code = '0FooModel';
-            const re = new RegExp(_Patterns2.default.IDENTIFIER);
+            const re = new RegExp(patterns.IDENTIFIER);
             const match = re.exec(code);
 
             _chai.assert.isNotOk(match);
@@ -460,7 +460,7 @@ describe('Patterns', () => {
 
         it('should recognise a variable identifier starting with a "$"', () => {
             const code = '$container';
-            const re = new RegExp(_Patterns2.default.IDENTIFIER);
+            const re = new RegExp(patterns.IDENTIFIER);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -469,7 +469,7 @@ describe('Patterns', () => {
 
         it('should recognise a variable identifier starting with a "_"', () => {
             const code = '_private';
-            const re = new RegExp(_Patterns2.default.IDENTIFIER);
+            const re = new RegExp(patterns.IDENTIFIER);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -482,7 +482,7 @@ describe('Patterns', () => {
     describe('#KEYWORDS', () => {
         it('should recognise a keyword', () => {
             const code = 'this';
-            const re = new RegExp(_Patterns2.default.KEYWORD);
+            const re = new RegExp(patterns.KEYWORD);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -491,7 +491,7 @@ describe('Patterns', () => {
 
         it('should recognise a keyword followed by a "."', () => {
             const code = 'this.foo';
-            const re = new RegExp(_Patterns2.default.KEYWORD);
+            const re = new RegExp(patterns.KEYWORD);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -500,7 +500,7 @@ describe('Patterns', () => {
 
         it('should recognise a keyword followed by a ";"', () => {
             const code = 'this;';
-            const re = new RegExp(_Patterns2.default.KEYWORD);
+            const re = new RegExp(patterns.KEYWORD);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -509,7 +509,7 @@ describe('Patterns', () => {
 
         it('should recognise a keyword followed by whitespace', () => {
             const code = 'this ';
-            const re = new RegExp(_Patterns2.default.KEYWORD);
+            const re = new RegExp(patterns.KEYWORD);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -518,7 +518,7 @@ describe('Patterns', () => {
 
         it('should not recognise a sequence of characters ending in a keyword', () => {
             const code = 'thistle';
-            const re = new RegExp(_Patterns2.default.KEYWORD);
+            const re = new RegExp(patterns.KEYWORD);
             const match = re.exec(code);
 
             _chai.assert.isNotOk(match);
@@ -526,7 +526,7 @@ describe('Patterns', () => {
 
         it('should not recognise a sequence of characters starting in a keyword', () => {
             const code = 'fuckthis';
-            const re = new RegExp(_Patterns2.default.KEYWORD);
+            const re = new RegExp(patterns.KEYWORD);
             const match = re.exec(code);
 
             _chai.assert.isNotOk(match);
@@ -538,7 +538,7 @@ describe('Patterns', () => {
     describe('#NUMBER', () => {
         it('should regonise an integer', () => {
             const code = '3';
-            const re = new RegExp(_Patterns2.default.NUMBER);
+            const re = new RegExp(patterns.NUMBER);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -547,7 +547,7 @@ describe('Patterns', () => {
 
         it('should regonise a decimal', () => {
             const code = '3.14';
-            const re = new RegExp(_Patterns2.default.NUMBER);
+            const re = new RegExp(patterns.NUMBER);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -556,7 +556,7 @@ describe('Patterns', () => {
 
         it('should not regonise a number followed by non-numeric characters', () => {
             const code = '3rdAttempt';
-            const re = new RegExp(_Patterns2.default.NUMBER);
+            const re = new RegExp(patterns.NUMBER);
             const match = re.exec(code);
 
             _chai.assert.isNotOk(match);
@@ -568,7 +568,7 @@ describe('Patterns', () => {
     describe('#WHITESPACE', () => {
         it('should recognise a single space character', () => {
             const code = ' ';
-            const re = new RegExp(_Patterns2.default.WHITESPACE);
+            const re = new RegExp(patterns.WHITESPACE);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -577,7 +577,7 @@ describe('Patterns', () => {
 
         it('should recognise multiple single space characters', () => {
             const code = '   ';
-            const re = new RegExp(_Patterns2.default.WHITESPACE);
+            const re = new RegExp(patterns.WHITESPACE);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -586,7 +586,7 @@ describe('Patterns', () => {
 
         it('should recognise a single tab character', () => {
             const code = '	';
-            const re = new RegExp(_Patterns2.default.WHITESPACE);
+            const re = new RegExp(patterns.WHITESPACE);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);
@@ -598,7 +598,7 @@ describe('Patterns', () => {
 
                 `;
 
-            const re = new RegExp(_Patterns2.default.WHITESPACE);
+            const re = new RegExp(patterns.WHITESPACE);
             const match = re.exec(code);
 
             _chai.assert.isOk(match);

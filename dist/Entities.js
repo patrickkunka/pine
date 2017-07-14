@@ -3,11 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-class Entities {}
+const PUNCTUATORS = exports.PUNCTUATORS = ['(', ')', '[', ']', '{', '}', '*', '+', '++', '!', '=', '==', '!=', '===', '!==', '-', '--', '<', '>', '<=', '>=', '.', ',', ':', ';', '&&'];
 
-Entities.PUNCTUATORS = ['(', ')', '[', ']', '{', '}', '*', '+', '++', '!', '=', '==', '!=', '===', '!==', '-', '--', '<', '>', '<=', '>=', '.', ',', ':', ';', '&&'];
-
-Entities.KEYWORDS = ['this', 'var', 'let', 'const', 'if', 'else', 'for', 'get', 'set', 'while', 'return', 'null', 'new', 'function', 'class', 'extends', 'static'];
-
-exports.default = Entities;
+const KEYWORDS = exports.KEYWORDS = ['this', 'var', 'let', 'const', 'if', 'else', 'for', 'get', 'set', 'while', 'return', 'null', 'new', 'function', 'class', 'extends', 'static'];
 //# sourceMappingURL=Entities.js.map

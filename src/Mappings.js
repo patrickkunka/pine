@@ -1,5 +1,5 @@
-import * as patterns    from './patterns';
-import * as models      from './models';
+import * as patterns from './patterns';
+import * as models   from './models';
 
 import {
     KEYWORDS

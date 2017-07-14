@@ -1,9 +1,8 @@
-import Util     from './Util';
-
-import * as models from './models';
+import * as models   from './models';
 import * as patterns from './Patterns';
-import Mappings from './Mappings';
-import flow     from './flow.json';
+import Util          from './Util';
+import Mappings      from './Mappings';
+import flow          from './flow.json';
 
 class AstParser {
     /**

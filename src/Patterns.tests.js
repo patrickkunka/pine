@@ -1,5 +1,5 @@
+import {assert}      from 'chai';
 import * as patterns from './Patterns';
-import {assert} from 'chai';
 
 describe('Patterns', () => {
     // /^("([^"\n\\]|\\")*"|'([^'\n\\]|\\')*')/

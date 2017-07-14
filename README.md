@@ -38,3 +38,6 @@ The above example returns an instance of `Program` which can be considered the A
 ## Requirements
 
 Node >= 7
+
+---
+*&copy; 2017 Patrick Kunka / KunkaLabs Ltd*

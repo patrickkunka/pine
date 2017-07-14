@@ -1,7 +1,7 @@
-import AstParser from './AstParser.js';
-import Models    from './Models.js';
+import {assert}     from 'chai';
 
-import {assert}  from 'chai';
+import AstParser    from './AstParser';
+import * as models  from './models';
 
 describe('AstParser', function() {
     it('should recognise a string literal', () => {
@@ -9,7 +9,7 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.Literal);
+        assert.instanceOf(token, models.Literal);
         assert.equal(token.kind, 'string');
         assert.equal(token.content, 'foo');
         assert.equal(token.raw, '"foo"');
@@ -20,7 +20,7 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.Literal);
+        assert.instanceOf(token, models.Literal);
         assert.equal(token.kind, 'string');
         assert.equal(token.content, '');
         assert.equal(token.raw, '""');
@@ -31,7 +31,7 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.Literal);
+        assert.instanceOf(token, models.Literal);
         assert.equal(token.kind, 'number');
         assert.equal(token.content, '0');
     });
@@ -41,7 +41,7 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.Literal);
+        assert.instanceOf(token, models.Literal);
         assert.equal(token.kind, 'boolean');
         assert.equal(token.content, 'true');
     });
@@ -51,7 +51,7 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.Literal);
+        assert.instanceOf(token, models.Literal);
         assert.equal(token.kind, 'boolean');
         assert.equal(token.content, 'false');
     });
@@ -61,12 +61,12 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.MemberExpression);
+        assert.instanceOf(token, models.MemberExpression);
 
-        assert.instanceOf(token.object, Models.Identifier);
+        assert.instanceOf(token.object, models.Identifier);
         assert.equal(token.object.content, 'foo');
 
-        assert.instanceOf(token.property, Models.Identifier);
+        assert.instanceOf(token.property, models.Identifier);
         assert.equal(token.property.content, 'bar');
     });
 
@@ -75,12 +75,12 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.MemberExpression);
+        assert.instanceOf(token, models.MemberExpression);
 
-        assert.instanceOf(token.object, Models.Keyword);
+        assert.instanceOf(token.object, models.Keyword);
         assert.equal(token.object.content, 'this');
 
-        assert.instanceOf(token.property, Models.Identifier);
+        assert.instanceOf(token.property, models.Identifier);
         assert.equal(token.property.content, 'bar');
     });
 
@@ -89,17 +89,17 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.MemberExpression);
+        assert.instanceOf(token, models.MemberExpression);
 
-        assert.instanceOf(token.object, Models.Keyword);
+        assert.instanceOf(token.object, models.Keyword);
         assert.equal(token.object.content, 'this');
 
-        assert.instanceOf(token.property, Models.MemberExpression);
+        assert.instanceOf(token.property, models.MemberExpression);
 
-        assert.instanceOf(token.property.object, Models.Identifier);
+        assert.instanceOf(token.property.object, models.Identifier);
         assert.equal(token.property.object.content, 'foo');
 
-        assert.instanceOf(token.property.property, Models.Identifier);
+        assert.instanceOf(token.property.property, models.Identifier);
         assert.equal(token.property.property.content, 'bar');
     });
 
@@ -109,8 +109,8 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.UnaryExpression);
-        assert.instanceOf(token.argument, Models.Identifier);
+        assert.instanceOf(token, models.UnaryExpression);
+        assert.instanceOf(token.argument, models.Identifier);
 
         assert.equal(token.operator.content, '!');
     });
@@ -121,8 +121,8 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.UnaryExpression);
-        assert.instanceOf(token.argument, Models.MemberExpression);
+        assert.instanceOf(token, models.UnaryExpression);
+        assert.instanceOf(token.argument, models.MemberExpression);
 
         assert.equal(token.operator.content, '!');
     });
@@ -132,14 +132,14 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.AssignmentExpression);
+        assert.instanceOf(token, models.AssignmentExpression);
 
-        assert.instanceOf(token.left, Models.Identifier);
+        assert.instanceOf(token.left, models.Identifier);
         assert.equal(token.left.content, 'foo');
 
         assert.equal(token.operator.content, '=');
 
-        assert.instanceOf(token.right, Models.Identifier);
+        assert.instanceOf(token.right, models.Identifier);
         assert.equal(token.right.content, 'bar');
     });
 
@@ -148,14 +148,14 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.AssignmentExpression);
+        assert.instanceOf(token, models.AssignmentExpression);
 
-        assert.instanceOf(token.left, Models.Identifier);
+        assert.instanceOf(token.left, models.Identifier);
         assert.equal(token.left.content, 'foo');
 
         assert.equal(token.operator.content, '=');
 
-        assert.instanceOf(token.right, Models.Literal);
+        assert.instanceOf(token.right, models.Literal);
         assert.equal(token.right.kind, 'number');
         assert.equal(token.right.content, '2');
     });
@@ -165,12 +165,12 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.AssignmentExpression);
-        assert.instanceOf(token.left, Models.MemberExpression);
+        assert.instanceOf(token, models.AssignmentExpression);
+        assert.instanceOf(token.left, models.MemberExpression);
 
         assert.equal(token.operator.content, '=');
 
-        assert.instanceOf(token.right, Models.Keyword);
+        assert.instanceOf(token.right, models.Keyword);
         assert.equal(token.right.content, 'this');
     });
 
@@ -179,12 +179,12 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.BinaryExpression);
-        assert.instanceOf(token.left, Models.Identifier);
+        assert.instanceOf(token, models.BinaryExpression);
+        assert.instanceOf(token.left, models.Identifier);
 
         assert.equal(token.operator.content, '>');
 
-        assert.instanceOf(token.right, Models.Literal);
+        assert.instanceOf(token.right, models.Literal);
         assert.equal(token.right.content, '2');
     });
 
@@ -193,12 +193,12 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.BinaryExpression);
-        assert.instanceOf(token.left, Models.Identifier);
+        assert.instanceOf(token, models.BinaryExpression);
+        assert.instanceOf(token.left, models.Identifier);
 
         assert.equal(token.operator.content, '>');
 
-        assert.instanceOf(token.right, Models.Literal);
+        assert.instanceOf(token.right, models.Literal);
         assert.equal(token.right.content, '2');
     });
 
@@ -207,12 +207,12 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.BinaryExpression);
-        assert.instanceOf(token.left, Models.Keyword);
+        assert.instanceOf(token, models.BinaryExpression);
+        assert.instanceOf(token.left, models.Keyword);
 
         assert.equal(token.operator.content, '<=');
 
-        assert.instanceOf(token.right, Models.Literal);
+        assert.instanceOf(token.right, models.Literal);
         assert.equal(token.right.content, '10');
     });
 
@@ -221,12 +221,12 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.BinaryExpression);
-        assert.instanceOf(token.left, Models.Keyword);
+        assert.instanceOf(token, models.BinaryExpression);
+        assert.instanceOf(token.left, models.Keyword);
 
         assert.equal(token.operator.content, '>');
 
-        assert.instanceOf(token.right, Models.UnaryExpression);
+        assert.instanceOf(token.right, models.UnaryExpression);
         assert.equal(token.right.argument.content, '1');
         assert.equal(token.right.operator.content, '-');
     });
@@ -236,12 +236,12 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.BinaryExpression);
-        assert.instanceOf(token.left, Models.Identifier);
+        assert.instanceOf(token, models.BinaryExpression);
+        assert.instanceOf(token.left, models.Identifier);
 
         assert.equal(token.operator.content, '!==');
 
-        assert.instanceOf(token.right, Models.Identifier);
+        assert.instanceOf(token.right, models.Identifier);
         assert.equal(token.right.content, 'bar');
     });
 
@@ -250,12 +250,12 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.BinaryExpression);
-        assert.instanceOf(token.left, Models.Identifier);
+        assert.instanceOf(token, models.BinaryExpression);
+        assert.instanceOf(token.left, models.Identifier);
 
         assert.equal(token.operator.content, '!==');
 
-        assert.instanceOf(token.right, Models.Keyword);
+        assert.instanceOf(token.right, models.Keyword);
         assert.equal(token.right.content, 'null');
     });
 
@@ -264,13 +264,13 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.BinaryExpression);
+        assert.instanceOf(token, models.BinaryExpression);
 
-        assert.instanceOf(token.left, Models.Identifier);
+        assert.instanceOf(token.left, models.Identifier);
 
         assert.equal(token.operator.content, '===');
 
-        assert.instanceOf(token.right, Models.Identifier);
+        assert.instanceOf(token.right, models.Identifier);
         assert.equal(token.right.content, 'bar');
     });
 
@@ -279,14 +279,14 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.LogicalExpression);
+        assert.instanceOf(token, models.LogicalExpression);
 
-        assert.instanceOf(token.left, Models.Identifier);
+        assert.instanceOf(token.left, models.Identifier);
         assert.equal(token.left.content, 'foo');
 
         assert.equal(token.operator.content, '&&');
 
-        assert.instanceOf(token.right, Models.Identifier);
+        assert.instanceOf(token.right, models.Identifier);
         assert.equal(token.right.content, 'bar');
     });
 
@@ -295,14 +295,14 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.LogicalExpression);
+        assert.instanceOf(token, models.LogicalExpression);
 
-        assert.instanceOf(token.left, Models.Identifier);
+        assert.instanceOf(token.left, models.Identifier);
         assert.equal(token.left.content, 'foo');
 
         assert.equal(token.operator.content, '&&');
 
-        assert.instanceOf(token.right, Models.Identifier);
+        assert.instanceOf(token.right, models.Identifier);
         assert.equal(token.right.content, 'bar');
     });
 
@@ -311,14 +311,14 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.LogicalExpression);
+        assert.instanceOf(token, models.LogicalExpression);
 
-        assert.instanceOf(token.left, Models.Identifier);
+        assert.instanceOf(token.left, models.Identifier);
         assert.equal(token.left.content, 'foo');
 
         assert.equal(token.operator.content, '&&');
 
-        assert.instanceOf(token.right, Models.UnaryExpression);
+        assert.instanceOf(token.right, models.UnaryExpression);
         assert.equal(token.right.argument.content, 'bar');
         assert.equal(token.right.operator.content, '!');
     });
@@ -328,21 +328,21 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.LogicalExpression);
+        assert.instanceOf(token, models.LogicalExpression);
 
-        assert.instanceOf(token.left, Models.Identifier);
+        assert.instanceOf(token.left, models.Identifier);
         assert.equal(token.left.content, 'foo');
 
         assert.equal(token.operator.content, '&&');
 
-        assert.instanceOf(token.right, Models.BinaryExpression);
+        assert.instanceOf(token.right, models.BinaryExpression);
 
-        assert.instanceOf(token.right.left, Models.Identifier);
+        assert.instanceOf(token.right.left, models.Identifier);
         assert.equal(token.right.left.content, 'bar');
 
         assert.equal(token.right.operator.content, '>');
 
-        assert.instanceOf(token.right.right, Models.Literal);
+        assert.instanceOf(token.right.right, models.Literal);
         assert.equal(token.right.right.content, '4');
     });
 
@@ -352,28 +352,28 @@ describe('AstParser', function() {
         const token = program.body[0];
 
         assert.equal(program.body.length, 1);
-        assert.instanceOf(token, Models.LogicalExpression);
+        assert.instanceOf(token, models.LogicalExpression);
 
-        assert.instanceOf(token.left, Models.BinaryExpression);
+        assert.instanceOf(token.left, models.BinaryExpression);
 
-        assert.instanceOf(token.left.left, Models.MemberExpression);
+        assert.instanceOf(token.left.left, models.MemberExpression);
         assert.equal(token.left.left.property.content, 'bar');
 
         assert.equal(token.left.operator.content, '!==');
 
-        assert.instanceOf(token.left.right, Models.Keyword);
+        assert.instanceOf(token.left.right, models.Keyword);
         assert.equal(token.left.right.content, 'null');
 
         assert.equal(token.operator.content, '&&');
 
-        assert.instanceOf(token.right, Models.BinaryExpression);
+        assert.instanceOf(token.right, models.BinaryExpression);
 
-        assert.instanceOf(token.right.left, Models.MemberExpression);
-        assert.instanceOf(token.right.left.object, Models.Keyword);
+        assert.instanceOf(token.right.left, models.MemberExpression);
+        assert.instanceOf(token.right.left.object, models.Keyword);
 
         assert.equal(token.right.operator.content, '!==');
 
-        assert.instanceOf(token.right.right, Models.Literal);
+        assert.instanceOf(token.right.right, models.Literal);
         assert.equal(token.right.right.content, '');
     });
 
@@ -382,12 +382,12 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.LogicalExpression);
-        assert.instanceOf(token.left, Models.LogicalExpression);
+        assert.instanceOf(token, models.LogicalExpression);
+        assert.instanceOf(token.left, models.LogicalExpression);
 
         assert.equal(token.operator.content, '||');
 
-        assert.instanceOf(token.right, Models.Identifier);
+        assert.instanceOf(token.right, models.Identifier);
     });
 
     it('should parse compound logical expressions according to parentheses placement', () => {
@@ -395,12 +395,12 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.LogicalExpression);
-        assert.instanceOf(token.left, Models.Identifier);
+        assert.instanceOf(token, models.LogicalExpression);
+        assert.instanceOf(token.left, models.Identifier);
 
         assert.equal(token.operator.content, '&&');
 
-        assert.instanceOf(token.right, Models.LogicalExpression);
+        assert.instanceOf(token.right, models.LogicalExpression);
     });
 
     it('should recognise a call expression upon an identifier', () => {
@@ -408,8 +408,8 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.CallExpression);
-        assert.instanceOf(token.callee, Models.Identifier);
+        assert.instanceOf(token, models.CallExpression);
+        assert.instanceOf(token.callee, models.Identifier);
 
         assert.equal(token.callee.content, 'foo');
         assert.equal(token.arguments.length, 0);
@@ -420,15 +420,15 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.CallExpression);
-        assert.instanceOf(token.callee, Models.Identifier);
+        assert.instanceOf(token, models.CallExpression);
+        assert.instanceOf(token.callee, models.Identifier);
 
         assert.equal(token.callee.content, 'foo');
         assert.equal(token.arguments.length, 3);
 
-        assert.instanceOf(token.arguments[0], Models.Identifier);
-        assert.instanceOf(token.arguments[1], Models.Literal);
-        assert.instanceOf(token.arguments[2], Models.Literal);
+        assert.instanceOf(token.arguments[0], models.Identifier);
+        assert.instanceOf(token.arguments[1], models.Literal);
+        assert.instanceOf(token.arguments[2], models.Literal);
     });
 
     it('should recognise a call expression upon a member expression', () => {
@@ -436,18 +436,18 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.CallExpression);
-        assert.instanceOf(token.callee, Models.MemberExpression);
-        assert.instanceOf(token.callee.object, Models.Identifier);
+        assert.instanceOf(token, models.CallExpression);
+        assert.instanceOf(token.callee, models.MemberExpression);
+        assert.instanceOf(token.callee.object, models.Identifier);
 
         assert.equal(token.callee.object.content, 'console');
 
-        assert.instanceOf(token.callee.property, Models.Identifier);
+        assert.instanceOf(token.callee.property, models.Identifier);
 
         assert.equal(token.callee.property.content, 'log');
         assert.equal(token.arguments.length, 1);
 
-        assert.instanceOf(token.arguments[0], Models.Literal);
+        assert.instanceOf(token.arguments[0], models.Literal);
     });
 
     it('should recognise a variable declaration with keyword `var`', () => {
@@ -455,15 +455,15 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.VariableDeclaration);
+        assert.instanceOf(token, models.VariableDeclaration);
 
         assert.equal(token.kind, 'var');
 
-        assert.instanceOf(token.identifier, Models.Identifier);
+        assert.instanceOf(token.identifier, models.Identifier);
 
         assert.equal(token.identifier.content, 'foo');
 
-        assert.instanceOf(token.init, Models.Literal);
+        assert.instanceOf(token.init, models.Literal);
 
         assert.equal(token.init.content, 'bar');
     });
@@ -473,15 +473,15 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.VariableDeclaration);
+        assert.instanceOf(token, models.VariableDeclaration);
 
         assert.equal(token.kind, 'const');
 
-        assert.instanceOf(token.identifier, Models.Identifier);
+        assert.instanceOf(token.identifier, models.Identifier);
 
         assert.equal(token.identifier.content, 'foo');
 
-        assert.instanceOf(token.init, Models.Literal);
+        assert.instanceOf(token.init, models.Literal);
 
         assert.equal(token.init.content, 'false');
     });
@@ -491,15 +491,15 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.VariableDeclaration);
+        assert.instanceOf(token, models.VariableDeclaration);
 
         assert.equal(token.kind, 'let');
 
-        assert.instanceOf(token.identifier, Models.Identifier);
+        assert.instanceOf(token.identifier, models.Identifier);
 
         assert.equal(token.identifier.content, 'foo');
 
-        assert.instanceOf(token.init, Models.Literal);
+        assert.instanceOf(token.init, models.Literal);
 
         assert.equal(token.init.content, '10');
     });
@@ -509,7 +509,7 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.ReturnStatement);
+        assert.instanceOf(token, models.ReturnStatement);
 
         assert.equal(token.argument, null);
     });
@@ -519,9 +519,9 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.ReturnStatement);
+        assert.instanceOf(token, models.ReturnStatement);
 
-        assert.instanceOf(token.argument, Models.Identifier);
+        assert.instanceOf(token.argument, models.Identifier);
 
         assert.equal(token.argument.content, 'foo');
     });
@@ -531,8 +531,8 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.ReturnStatement);
-        assert.instanceOf(token.argument, Models.LogicalExpression);
+        assert.instanceOf(token, models.ReturnStatement);
+        assert.instanceOf(token.argument, models.LogicalExpression);
     });
 
     it('should recognise a return statement with a binary expression as an argument', () => {
@@ -540,8 +540,8 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.ReturnStatement);
-        assert.instanceOf(token.argument, Models.BinaryExpression);
+        assert.instanceOf(token, models.ReturnStatement);
+        assert.instanceOf(token.argument, models.BinaryExpression);
     });
 
     it('should recognise a return statement with a compound logical expression as an argument', () => {
@@ -550,13 +550,13 @@ describe('AstParser', function() {
         const token = program.body[0];
         const logicalExpression = token.argument;
 
-        assert.instanceOf(token, Models.ReturnStatement);
-        assert.instanceOf(logicalExpression, Models.LogicalExpression);
+        assert.instanceOf(token, models.ReturnStatement);
+        assert.instanceOf(logicalExpression, models.LogicalExpression);
 
-        assert.instanceOf(logicalExpression.left, Models.LogicalExpression);
-        assert.instanceOf(logicalExpression.left.left, Models.BinaryExpression);
-        assert.instanceOf(logicalExpression.left.right, Models.MemberExpression);
-        assert.instanceOf(logicalExpression.right, Models.MemberExpression);
+        assert.instanceOf(logicalExpression.left, models.LogicalExpression);
+        assert.instanceOf(logicalExpression.left.left, models.BinaryExpression);
+        assert.instanceOf(logicalExpression.left.right, models.MemberExpression);
+        assert.instanceOf(logicalExpression.right, models.MemberExpression);
     });
 
     it('should recognise a return statement with a unary expression as an argument', () => {
@@ -564,8 +564,8 @@ describe('AstParser', function() {
         const program = AstParser.parse(code);
         const token = program.body[0];
 
-        assert.instanceOf(token, Models.ReturnStatement);
-        assert.instanceOf(token.argument, Models.UnaryExpression);
+        assert.instanceOf(token, models.ReturnStatement);
+        assert.instanceOf(token.argument, models.UnaryExpression);
 
         assert.equal(token.argument.operator.content, '!');
     });
@@ -581,8 +581,8 @@ describe('AstParser', function() {
         const token = program.body[0];
         const blockBody = program.body[0].body;
 
-        assert.instanceOf(token, Models.BlockStatement);
-        assert.instanceOf(blockBody[0], Models.VariableDeclaration);
+        assert.instanceOf(token, models.BlockStatement);
+        assert.instanceOf(blockBody[0], models.VariableDeclaration);
     });
 
     it('should recognise an abstract block statement with multiple statements', () => {
@@ -598,9 +598,9 @@ describe('AstParser', function() {
         const token = program.body[0];
         const blockBody = program.body[0].body;
 
-        assert.instanceOf(token, Models.BlockStatement);
-        assert.instanceOf(blockBody[0], Models.VariableDeclaration);
-        assert.instanceOf(blockBody[1], Models.ReturnStatement);
+        assert.instanceOf(token, models.BlockStatement);
+        assert.instanceOf(blockBody[0], models.VariableDeclaration);
+        assert.instanceOf(blockBody[1], models.ReturnStatement);
     });
 
     it('should recognise a function declaration', () => {
@@ -616,13 +616,13 @@ describe('AstParser', function() {
         const token = program.body[0];
         const functionBody = token.body.body;
 
-        assert.instanceOf(token, Models.FunctionDeclaration);
-        assert.instanceOf(token.identifier, Models.Identifier);
+        assert.instanceOf(token, models.FunctionDeclaration);
+        assert.instanceOf(token.identifier, models.Identifier);
 
         assert.equal(token.params.length, 0);
 
-        assert.instanceOf(functionBody[0], Models.VariableDeclaration);
-        assert.instanceOf(functionBody[1], Models.ReturnStatement);
+        assert.instanceOf(functionBody[0], models.VariableDeclaration);
+        assert.instanceOf(functionBody[1], models.ReturnStatement);
     });
 
     it('should recognise a function declaration with one or more paramters', () => {
@@ -636,14 +636,14 @@ describe('AstParser', function() {
         const token = program.body[0];
         const functionBody = token.body.body;
 
-        assert.instanceOf(token, Models.FunctionDeclaration);
-        assert.instanceOf(token.identifier, Models.Identifier);
+        assert.instanceOf(token, models.FunctionDeclaration);
+        assert.instanceOf(token.identifier, models.Identifier);
 
         assert.equal(token.params.length, 2);
         assert.equal(token.params[0].content, 'x');
         assert.equal(token.params[1].content, 'y');
 
-        assert.instanceOf(functionBody[0], Models.ReturnStatement);
+        assert.instanceOf(functionBody[0], models.ReturnStatement);
     });
 
     it('should recognise an if statement with only a consequent', () => {
@@ -657,10 +657,10 @@ describe('AstParser', function() {
         const token = program.body[0];
         const consequent = token.consequent;
 
-        assert.instanceOf(token, Models.IfStatement);
-        assert.instanceOf(token.test, Models.BinaryExpression);
+        assert.instanceOf(token, models.IfStatement);
+        assert.instanceOf(token.test, models.BinaryExpression);
 
-        assert.instanceOf(consequent.body[0], Models.ReturnStatement);
+        assert.instanceOf(consequent.body[0], models.ReturnStatement);
     });
 
     it('should recognise an if statement with a single identifier as a test', () => {
@@ -674,10 +674,10 @@ describe('AstParser', function() {
         const token = program.body[0];
         const consequent = token.consequent;
 
-        assert.instanceOf(token, Models.IfStatement);
-        assert.instanceOf(token.test, Models.Identifier);
+        assert.instanceOf(token, models.IfStatement);
+        assert.instanceOf(token.test, models.Identifier);
 
-        assert.instanceOf(consequent.body[0], Models.ReturnStatement);
+        assert.instanceOf(consequent.body[0], models.ReturnStatement);
     });
 
     it('should recognise an if statement with a single member expression as a test', () => {
@@ -691,10 +691,10 @@ describe('AstParser', function() {
         const token = program.body[0];
         const consequent = token.consequent;
 
-        assert.instanceOf(token, Models.IfStatement);
-        assert.instanceOf(token.test, Models.MemberExpression);
+        assert.instanceOf(token, models.IfStatement);
+        assert.instanceOf(token.test, models.MemberExpression);
 
-        assert.instanceOf(consequent.body[0], Models.ReturnStatement);
+        assert.instanceOf(consequent.body[0], models.ReturnStatement);
     });
 
     it('should recognise an if statement with a consequent and alternate', () => {
@@ -711,11 +711,11 @@ describe('AstParser', function() {
         const consequent = token.consequent;
         const alternate = token.alternate;
 
-        assert.instanceOf(token, Models.IfStatement);
-        assert.instanceOf(token.test, Models.BinaryExpression);
+        assert.instanceOf(token, models.IfStatement);
+        assert.instanceOf(token.test, models.BinaryExpression);
 
-        assert.instanceOf(consequent.body[0], Models.ReturnStatement);
-        assert.instanceOf(alternate.body[0], Models.ReturnStatement);
+        assert.instanceOf(consequent.body[0], models.ReturnStatement);
+        assert.instanceOf(alternate.body[0], models.ReturnStatement);
     });
 
     it('should recognise an if statement with a nested if statement within the alternate', () => {
@@ -732,13 +732,13 @@ describe('AstParser', function() {
         const consequent = token.consequent;
         const alternate = token.alternate;
 
-        assert.instanceOf(token, Models.IfStatement);
-        assert.instanceOf(token.test, Models.BinaryExpression);
+        assert.instanceOf(token, models.IfStatement);
+        assert.instanceOf(token.test, models.BinaryExpression);
 
-        assert.instanceOf(consequent.body[0], Models.ReturnStatement);
-        assert.instanceOf(alternate, Models.IfStatement);
+        assert.instanceOf(consequent.body[0], models.ReturnStatement);
+        assert.instanceOf(alternate, models.IfStatement);
 
-        assert.instanceOf(alternate.consequent.body[0], Models.ReturnStatement);
+        assert.instanceOf(alternate.consequent.body[0], models.ReturnStatement);
         assert.equal(alternate.altenative, null);
     });
 
@@ -758,13 +758,13 @@ describe('AstParser', function() {
         const consequent = token.consequent;
         const alternate = token.alternate;
 
-        assert.instanceOf(token, Models.IfStatement);
-        assert.instanceOf(token.test, Models.BinaryExpression);
+        assert.instanceOf(token, models.IfStatement);
+        assert.instanceOf(token.test, models.BinaryExpression);
 
-        assert.instanceOf(consequent.body[0], Models.ReturnStatement);
-        assert.instanceOf(alternate, Models.IfStatement);
+        assert.instanceOf(consequent.body[0], models.ReturnStatement);
+        assert.instanceOf(alternate, models.IfStatement);
 
-        assert.instanceOf(alternate.consequent.body[0], Models.ReturnStatement);
-        assert.instanceOf(alternate.alternate.body[0], Models.ReturnStatement);
+        assert.instanceOf(alternate.consequent.body[0], models.ReturnStatement);
+        assert.instanceOf(alternate.alternate.body[0], models.ReturnStatement);
     });
 });

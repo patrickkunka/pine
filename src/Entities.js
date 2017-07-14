@@ -1,6 +1,4 @@
-class Entities {}
-
-Entities.PUNCTUATORS = [
+export const PUNCTUATORS = [
     '(', ')',
     '[', ']',
     '{', '}',
@@ -14,7 +12,7 @@ Entities.PUNCTUATORS = [
     '&&'
 ];
 
-Entities.KEYWORDS = [
+export const KEYWORDS = [
     'this',
     'var',
     'let',
@@ -33,5 +31,3 @@ Entities.KEYWORDS = [
     'extends',
     'static'
 ];
-
-export default Entities;

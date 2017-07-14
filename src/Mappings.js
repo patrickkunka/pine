@@ -1,10 +1,13 @@
-import Patterns from './Patterns';
-import Models   from './Models';
-import Entities from './Entities';
+import * as patterns    from './patterns';
+import * as models      from './models';
+
+import {
+    KEYWORDS
+} from './Entities';
 
 class Mappings {
     static getLiteral(match, startIndex, type) {
-        const literal   = new Models.Literal();
+        const literal   = new models.Literal();
         const captured  = match[1];
 
         literal.kind    = type;
@@ -22,14 +25,14 @@ class Mappings {
     }
 
     static getKeyword(match, startIndex) {
-        const keyword   = new Models.Keyword();
+        const keyword   = new models.Keyword();
         const captured  = match[1];
 
         keyword.content = captured;
         keyword.start   = startIndex;
         keyword.end     = startIndex + captured.length;
 
-        if (Entities.KEYWORDS.indexOf(captured) < 0) {
+        if (KEYWORDS.indexOf(captured) < 0) {
             throw new Error(`[mappings] Illegal token ${captured}`);
         }
 
@@ -37,7 +40,7 @@ class Mappings {
     }
 
     static getIdentifier(match, startIndex) {
-        const identifier    = new Models.Identifier();
+        const identifier    = new models.Identifier();
         const captured      = match[1];
 
         identifier.content  = captured;
@@ -48,7 +51,7 @@ class Mappings {
     }
 
     static getWhitespace(match, startIndex) {
-        const whitespace    = new Models.Whitespace();
+        const whitespace    = new models.Whitespace();
         const captured      = match[1];
 
         whitespace.content  = captured;
@@ -59,7 +62,7 @@ class Mappings {
     }
 
     static getPunctuator(match, startIndex) {
-        const punctuator    = new Models.Punctuator();
+        const punctuator    = new models.Punctuator();
         const captured      = match[1];
 
         punctuator.content  = captured;
@@ -110,7 +113,7 @@ class Mappings {
         for (i = 0; i <= 2; i++) {
             let token = segment[i];
             let tokenString = token.toString();
-            let re = new RegExp('^' + Patterns.MEMBER_EXPRESSION);
+            let re = new RegExp('^' + patterns.MEMBER_EXPRESSION);
 
             if (tokenString === '.') continue;
 
@@ -128,7 +131,7 @@ class Mappings {
                 let segmentString = tokens.slice(startIndex + i).join(' ');
 
                 if (re.test(segmentString)) {
-                    memberExpression.property = new Models.MemberExpression();
+                    memberExpression.property = new models.MemberExpression();
 
                     Mappings.mapMemberExpression(memberExpression.property, tokens, startIndex + i, memberExpression);
                 } else {

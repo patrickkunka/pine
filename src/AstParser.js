@@ -1,8 +1,8 @@
 import Util     from './Util';
 
-import Models   from './Models';
+import * as models from './models';
+import * as patterns from './Patterns';
 import Mappings from './Mappings';
-import Patterns from './Patterns';
 import flow     from './flow.json';
 
 class AstParser {
@@ -13,7 +13,7 @@ class AstParser {
      */
 
     static parse(programString, classInstance=null) {
-        const Program = new Models.Program();
+        const Program = new models.Program();
         const tokens = AstParser.ingestProgramString(programString);
 
         AstParser.parseTokensIntoAst(tokens, classInstance);
@@ -35,7 +35,7 @@ class AstParser {
         let token = null;
 
         while ((token = AstParser.matchToken(programString, startIndex))) {
-            if (!(token instanceof Models.Whitespace)) {
+            if (!(token instanceof models.Whitespace)) {
                 tokens.push(token);
             }
 
@@ -62,19 +62,19 @@ class AstParser {
 
         let match = null;
 
-        if ((match = new RegExp(Patterns.BOOLEAN).exec(slice))) {
+        if ((match = new RegExp(patterns.BOOLEAN).exec(slice))) {
             return Mappings.getLiteral(match, startIndex, 'boolean');
-        } if ((match = new RegExp(Patterns.NUMBER).exec(slice))) {
+        } if ((match = new RegExp(patterns.NUMBER).exec(slice))) {
             return Mappings.getLiteral(match, startIndex, 'number');
-        } else if ((match = new RegExp(Patterns.KEYWORD).exec(slice))) {
+        } else if ((match = new RegExp(patterns.KEYWORD).exec(slice))) {
             return Mappings.getKeyword(match, startIndex);
-        } else if ((match = new RegExp(Patterns.PUNCTUATOR).exec(slice))) {
+        } else if ((match = new RegExp(patterns.PUNCTUATOR).exec(slice))) {
             return Mappings.getPunctuator(match, startIndex);
-        } else if ((match = new RegExp(Patterns.STRING).exec(slice))) {
+        } else if ((match = new RegExp(patterns.STRING).exec(slice))) {
             return Mappings.getLiteral(match, startIndex, 'string');
-        } else if ((match = new RegExp(Patterns.IDENTIFIER).exec(slice))) {
+        } else if ((match = new RegExp(patterns.IDENTIFIER).exec(slice))) {
             return Mappings.getIdentifier(match, startIndex);
-        } else if ((match = new RegExp(Patterns.WHITESPACE).exec(slice))) {
+        } else if ((match = new RegExp(patterns.WHITESPACE).exec(slice))) {
             return Mappings.getWhitespace(match, startIndex);
         }
 
@@ -91,9 +91,9 @@ class AstParser {
         for (let i = 0, type; i < flow.length; i++) {
             type = flow[i];
 
-            let Model = Models[Util.pascalCase(type)];
+            let Model = models[Util.pascalCase(type)];
             let mapper = Mappings['map' + Util.pascalCase(type)];
-            let pattern = Patterns[type];
+            let pattern = patterns[type];
 
             AstParser.traverseTokens(tokens, Model, mapper, pattern, classInstance);
         }
@@ -157,7 +157,7 @@ class AstParser {
     }
 }
 
-AstParser.Models = Models;
-AstParser.Patterns = Patterns;
+AstParser.Models   = models;
+AstParser.Patterns = patterns;
 
 export default AstParser;

@@ -1,13 +1,12 @@
 {
   "name": "pine",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "./dist/AstParser.js",
   "scripts": {
     "test": "mocha ./tests/unit.js",
     "babel": "babel src --out-dir dist --source-maps --copy-files --watch"
   },
   "devDependencies": {
-    "source-map-support": "^0.4.6",
     "babel-core": "^6.18.0",
     "babel-preset-node7": "^1.4.0",
     "babel-register": "^6.18.0",
@@ -15,7 +14,9 @@
     "chai-as-promised": "^5.3.0",
     "chai-shallow-deep-equal": "^1.4.0",
     "coveralls": "^2.11.14",
+    "create-index": "^2.2.0",
     "mocha": "^3.0.2",
-    "mocha-lcov-reporter": "^1.2.0"
+    "mocha-lcov-reporter": "^1.2.0",
+    "source-map-support": "^0.4.6"
   }
 }

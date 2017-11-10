@@ -39,12 +39,13 @@ The above example returns an instance of `pine.Models.Program` which can be cons
 Program {
     body: [
         VariableDeclaration {
-            kind: 'var'
+            kind: 'var',
             identifier: Identifier {
                 content: 'foo'
-            }
+            },
             init: Literal {
                 kind: 'string',
+                raw: "'bar'",
                 content: 'bar'
             }
         }

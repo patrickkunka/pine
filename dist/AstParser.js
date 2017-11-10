@@ -4,10 +4,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _Util = require('./Util');
-
-var _Util2 = _interopRequireDefault(_Util);
-
 var _models = require('./models');
 
 var models = _interopRequireWildcard(_models);
@@ -16,17 +12,21 @@ var _Patterns = require('./Patterns');
 
 var patterns = _interopRequireWildcard(_Patterns);
 
+var _Util = require('./Util');
+
+var _Util2 = _interopRequireDefault(_Util);
+
 var _Mappings = require('./Mappings');
 
 var _Mappings2 = _interopRequireDefault(_Mappings);
 
-var _flow = require('./flow.json');
+var _parsingOrder = require('./parsingOrder.json');
 
-var _flow2 = _interopRequireDefault(_flow);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+var _parsingOrder2 = _interopRequireDefault(_parsingOrder);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 class AstParser {
     /**
@@ -111,8 +111,8 @@ class AstParser {
      */
 
     static parseTokensIntoAst(tokens, classInstance) {
-        for (let i = 0, type; i < _flow2.default.length; i++) {
-            type = _flow2.default[i];
+        for (let i = 0, type; i < _parsingOrder2.default.length; i++) {
+            type = _parsingOrder2.default[i];
 
             let Model = models[_Util2.default.pascalCase(type)];
             let mapper = _Mappings2.default['map' + _Util2.default.pascalCase(type)];

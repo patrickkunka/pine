@@ -2,7 +2,7 @@ import * as models   from './models';
 import * as patterns from './Patterns';
 import Util          from './Util';
 import Mappings      from './Mappings';
-import flow          from './flow.json';
+import parsingOrder  from './parsingOrder.json';
 
 class AstParser {
     /**
@@ -87,8 +87,8 @@ class AstParser {
      */
 
     static parseTokensIntoAst(tokens, classInstance) {
-        for (let i = 0, type; i < flow.length; i++) {
-            type = flow[i];
+        for (let i = 0, type; i < parsingOrder.length; i++) {
+            type = parsingOrder[i];
 
             let Model = models[Util.pascalCase(type)];
             let mapper = Mappings['map' + Util.pascalCase(type)];

@@ -33,7 +33,24 @@ programString = 'var foo = "bar";';
 const program = Pine.parse(programString);
 ```
 
-The above example returns an instance of `Program` which can be considered the AST root.
+The above example returns an instance of `pine.Models.Program` which can be considered the AST root. In the above example, the returned value is as follows:
+
+```js
+Program {
+    body: [
+        VariableDeclaration {
+            kind: 'var'
+            identifier: Identifier {
+                content: 'foo'
+            }
+            init: Literal {
+                kind: 'string',
+                content: 'bar'
+            }
+        }
+    ]
+}
+```
 
 ## Requirements
 

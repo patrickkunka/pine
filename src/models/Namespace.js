@@ -2,6 +2,8 @@ import Program from './Program';
 
 class Namespace extends Program {
     constructor() {
+        super();
+
         this.name = '';
         this.dependencies = [];
 

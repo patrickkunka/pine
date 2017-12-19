@@ -12,6 +12,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class Dependency extends _Token2.default {
     constructor() {
+        super();
+
         this.name = '';
         this.path = '';
 

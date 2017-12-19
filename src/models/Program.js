@@ -5,8 +5,6 @@ class Program extends Token {
         super();
 
         this.body = [];
-
-        Object.seal(this);
     }
 }
 

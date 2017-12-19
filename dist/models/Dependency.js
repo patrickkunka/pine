@@ -10,13 +10,14 @@ var _Token2 = _interopRequireDefault(_Token);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-class Program extends _Token2.default {
+class Dependency extends _Token2.default {
     constructor() {
-        super();
+        this.name = '';
+        this.path = '';
 
-        this.body = [];
+        Object.seal(this);
     }
 }
 
-exports.default = Program;
-//# sourceMappingURL=Program.js.map
+exports.default = Dependency;
+//# sourceMappingURL=Dependency.js.map

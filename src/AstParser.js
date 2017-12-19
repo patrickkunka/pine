@@ -1,5 +1,5 @@
 import * as Models   from './models';
-import * as patterns from './Patterns';
+import * as Patterns from './Patterns';
 import Util          from './Util';
 import Mappings      from './Mappings';
 import parsingOrder  from './parsingOrder.json';
@@ -61,19 +61,19 @@ class AstParser {
 
         let match = null;
 
-        if ((match = new RegExp(patterns.BOOLEAN).exec(slice))) {
+        if ((match = new RegExp(Patterns.BOOLEAN).exec(slice))) {
             return Mappings.getLiteral(match, startIndex, 'boolean');
-        } if ((match = new RegExp(patterns.NUMBER).exec(slice))) {
+        } if ((match = new RegExp(Patterns.NUMBER).exec(slice))) {
             return Mappings.getLiteral(match, startIndex, 'number');
-        } else if ((match = new RegExp(patterns.KEYWORD).exec(slice))) {
+        } else if ((match = new RegExp(Patterns.KEYWORD).exec(slice))) {
             return Mappings.getKeyword(match, startIndex);
-        } else if ((match = new RegExp(patterns.PUNCTUATOR).exec(slice))) {
+        } else if ((match = new RegExp(Patterns.PUNCTUATOR).exec(slice))) {
             return Mappings.getPunctuator(match, startIndex);
-        } else if ((match = new RegExp(patterns.STRING).exec(slice))) {
+        } else if ((match = new RegExp(Patterns.STRING).exec(slice))) {
             return Mappings.getLiteral(match, startIndex, 'string');
-        } else if ((match = new RegExp(patterns.IDENTIFIER).exec(slice))) {
+        } else if ((match = new RegExp(Patterns.IDENTIFIER).exec(slice))) {
             return Mappings.getIdentifier(match, startIndex);
-        } else if ((match = new RegExp(patterns.WHITESPACE).exec(slice))) {
+        } else if ((match = new RegExp(Patterns.WHITESPACE).exec(slice))) {
             return Mappings.getWhitespace(match, startIndex);
         }
 
@@ -92,7 +92,7 @@ class AstParser {
 
             let Model = Models[Util.pascalCase(type)];
             let mapper = Mappings['map' + Util.pascalCase(type)];
-            let pattern = patterns[type];
+            let pattern = Patterns[type];
 
             AstParser.traverseTokens(tokens, Model, mapper, pattern, classInstance);
         }
@@ -156,7 +156,5 @@ class AstParser {
     }
 }
 
-AstParser.Models   = Models;
-AstParser.Patterns = patterns;
-
+export {Models, Patterns};
 export default AstParser;

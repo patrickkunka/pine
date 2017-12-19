@@ -6,12 +6,6 @@ var _AstParser = require('./AstParser');
 
 var _AstParser2 = _interopRequireDefault(_AstParser);
 
-var _models = require('./models');
-
-var models = _interopRequireWildcard(_models);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 describe('AstParser', function () {
@@ -20,7 +14,7 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.Literal);
+        _chai.assert.instanceOf(token, _AstParser.Models.Literal);
         _chai.assert.equal(token.kind, 'string');
         _chai.assert.equal(token.content, 'foo');
         _chai.assert.equal(token.raw, '"foo"');
@@ -31,7 +25,7 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.Literal);
+        _chai.assert.instanceOf(token, _AstParser.Models.Literal);
         _chai.assert.equal(token.kind, 'string');
         _chai.assert.equal(token.content, '');
         _chai.assert.equal(token.raw, '""');
@@ -42,7 +36,7 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.Literal);
+        _chai.assert.instanceOf(token, _AstParser.Models.Literal);
         _chai.assert.equal(token.kind, 'number');
         _chai.assert.equal(token.content, '0');
     });
@@ -52,7 +46,7 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.Literal);
+        _chai.assert.instanceOf(token, _AstParser.Models.Literal);
         _chai.assert.equal(token.kind, 'boolean');
         _chai.assert.equal(token.content, 'true');
     });
@@ -62,7 +56,7 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.Literal);
+        _chai.assert.instanceOf(token, _AstParser.Models.Literal);
         _chai.assert.equal(token.kind, 'boolean');
         _chai.assert.equal(token.content, 'false');
     });
@@ -72,12 +66,12 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.MemberExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.MemberExpression);
 
-        _chai.assert.instanceOf(token.object, models.Identifier);
+        _chai.assert.instanceOf(token.object, _AstParser.Models.Identifier);
         _chai.assert.equal(token.object.content, 'foo');
 
-        _chai.assert.instanceOf(token.property, models.Identifier);
+        _chai.assert.instanceOf(token.property, _AstParser.Models.Identifier);
         _chai.assert.equal(token.property.content, 'bar');
     });
 
@@ -86,12 +80,12 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.MemberExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.MemberExpression);
 
-        _chai.assert.instanceOf(token.object, models.Keyword);
+        _chai.assert.instanceOf(token.object, _AstParser.Models.Keyword);
         _chai.assert.equal(token.object.content, 'this');
 
-        _chai.assert.instanceOf(token.property, models.Identifier);
+        _chai.assert.instanceOf(token.property, _AstParser.Models.Identifier);
         _chai.assert.equal(token.property.content, 'bar');
     });
 
@@ -100,17 +94,17 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.MemberExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.MemberExpression);
 
-        _chai.assert.instanceOf(token.object, models.Keyword);
+        _chai.assert.instanceOf(token.object, _AstParser.Models.Keyword);
         _chai.assert.equal(token.object.content, 'this');
 
-        _chai.assert.instanceOf(token.property, models.MemberExpression);
+        _chai.assert.instanceOf(token.property, _AstParser.Models.MemberExpression);
 
-        _chai.assert.instanceOf(token.property.object, models.Identifier);
+        _chai.assert.instanceOf(token.property.object, _AstParser.Models.Identifier);
         _chai.assert.equal(token.property.object.content, 'foo');
 
-        _chai.assert.instanceOf(token.property.property, models.Identifier);
+        _chai.assert.instanceOf(token.property.property, _AstParser.Models.Identifier);
         _chai.assert.equal(token.property.property.content, 'bar');
     });
 
@@ -120,8 +114,8 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.UnaryExpression);
-        _chai.assert.instanceOf(token.argument, models.Identifier);
+        _chai.assert.instanceOf(token, _AstParser.Models.UnaryExpression);
+        _chai.assert.instanceOf(token.argument, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.operator.content, '!');
     });
@@ -132,8 +126,8 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.UnaryExpression);
-        _chai.assert.instanceOf(token.argument, models.MemberExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.UnaryExpression);
+        _chai.assert.instanceOf(token.argument, _AstParser.Models.MemberExpression);
 
         _chai.assert.equal(token.operator.content, '!');
     });
@@ -143,14 +137,14 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.AssignmentExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.AssignmentExpression);
 
-        _chai.assert.instanceOf(token.left, models.Identifier);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Identifier);
         _chai.assert.equal(token.left.content, 'foo');
 
         _chai.assert.equal(token.operator.content, '=');
 
-        _chai.assert.instanceOf(token.right, models.Identifier);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.Identifier);
         _chai.assert.equal(token.right.content, 'bar');
     });
 
@@ -159,14 +153,14 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.AssignmentExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.AssignmentExpression);
 
-        _chai.assert.instanceOf(token.left, models.Identifier);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Identifier);
         _chai.assert.equal(token.left.content, 'foo');
 
         _chai.assert.equal(token.operator.content, '=');
 
-        _chai.assert.instanceOf(token.right, models.Literal);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.Literal);
         _chai.assert.equal(token.right.kind, 'number');
         _chai.assert.equal(token.right.content, '2');
     });
@@ -176,12 +170,12 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.AssignmentExpression);
-        _chai.assert.instanceOf(token.left, models.MemberExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.AssignmentExpression);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.MemberExpression);
 
         _chai.assert.equal(token.operator.content, '=');
 
-        _chai.assert.instanceOf(token.right, models.Keyword);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.Keyword);
         _chai.assert.equal(token.right.content, 'this');
     });
 
@@ -190,12 +184,12 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.BinaryExpression);
-        _chai.assert.instanceOf(token.left, models.Identifier);
+        _chai.assert.instanceOf(token, _AstParser.Models.BinaryExpression);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.operator.content, '>');
 
-        _chai.assert.instanceOf(token.right, models.Literal);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.Literal);
         _chai.assert.equal(token.right.content, '2');
     });
 
@@ -204,12 +198,12 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.BinaryExpression);
-        _chai.assert.instanceOf(token.left, models.Identifier);
+        _chai.assert.instanceOf(token, _AstParser.Models.BinaryExpression);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.operator.content, '>');
 
-        _chai.assert.instanceOf(token.right, models.Literal);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.Literal);
         _chai.assert.equal(token.right.content, '2');
     });
 
@@ -218,12 +212,12 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.BinaryExpression);
-        _chai.assert.instanceOf(token.left, models.Keyword);
+        _chai.assert.instanceOf(token, _AstParser.Models.BinaryExpression);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Keyword);
 
         _chai.assert.equal(token.operator.content, '<=');
 
-        _chai.assert.instanceOf(token.right, models.Literal);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.Literal);
         _chai.assert.equal(token.right.content, '10');
     });
 
@@ -232,12 +226,12 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.BinaryExpression);
-        _chai.assert.instanceOf(token.left, models.Keyword);
+        _chai.assert.instanceOf(token, _AstParser.Models.BinaryExpression);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Keyword);
 
         _chai.assert.equal(token.operator.content, '>');
 
-        _chai.assert.instanceOf(token.right, models.UnaryExpression);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.UnaryExpression);
         _chai.assert.equal(token.right.argument.content, '1');
         _chai.assert.equal(token.right.operator.content, '-');
     });
@@ -247,12 +241,12 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.BinaryExpression);
-        _chai.assert.instanceOf(token.left, models.Identifier);
+        _chai.assert.instanceOf(token, _AstParser.Models.BinaryExpression);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.operator.content, '!==');
 
-        _chai.assert.instanceOf(token.right, models.Identifier);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.Identifier);
         _chai.assert.equal(token.right.content, 'bar');
     });
 
@@ -261,12 +255,12 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.BinaryExpression);
-        _chai.assert.instanceOf(token.left, models.Identifier);
+        _chai.assert.instanceOf(token, _AstParser.Models.BinaryExpression);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.operator.content, '!==');
 
-        _chai.assert.instanceOf(token.right, models.Keyword);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.Keyword);
         _chai.assert.equal(token.right.content, 'null');
     });
 
@@ -275,13 +269,13 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.BinaryExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.BinaryExpression);
 
-        _chai.assert.instanceOf(token.left, models.Identifier);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.operator.content, '===');
 
-        _chai.assert.instanceOf(token.right, models.Identifier);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.Identifier);
         _chai.assert.equal(token.right.content, 'bar');
     });
 
@@ -290,14 +284,14 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.LogicalExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.LogicalExpression);
 
-        _chai.assert.instanceOf(token.left, models.Identifier);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Identifier);
         _chai.assert.equal(token.left.content, 'foo');
 
         _chai.assert.equal(token.operator.content, '&&');
 
-        _chai.assert.instanceOf(token.right, models.Identifier);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.Identifier);
         _chai.assert.equal(token.right.content, 'bar');
     });
 
@@ -306,14 +300,14 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.LogicalExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.LogicalExpression);
 
-        _chai.assert.instanceOf(token.left, models.Identifier);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Identifier);
         _chai.assert.equal(token.left.content, 'foo');
 
         _chai.assert.equal(token.operator.content, '&&');
 
-        _chai.assert.instanceOf(token.right, models.Identifier);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.Identifier);
         _chai.assert.equal(token.right.content, 'bar');
     });
 
@@ -322,14 +316,14 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.LogicalExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.LogicalExpression);
 
-        _chai.assert.instanceOf(token.left, models.Identifier);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Identifier);
         _chai.assert.equal(token.left.content, 'foo');
 
         _chai.assert.equal(token.operator.content, '&&');
 
-        _chai.assert.instanceOf(token.right, models.UnaryExpression);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.UnaryExpression);
         _chai.assert.equal(token.right.argument.content, 'bar');
         _chai.assert.equal(token.right.operator.content, '!');
     });
@@ -339,21 +333,21 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.LogicalExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.LogicalExpression);
 
-        _chai.assert.instanceOf(token.left, models.Identifier);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Identifier);
         _chai.assert.equal(token.left.content, 'foo');
 
         _chai.assert.equal(token.operator.content, '&&');
 
-        _chai.assert.instanceOf(token.right, models.BinaryExpression);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.BinaryExpression);
 
-        _chai.assert.instanceOf(token.right.left, models.Identifier);
+        _chai.assert.instanceOf(token.right.left, _AstParser.Models.Identifier);
         _chai.assert.equal(token.right.left.content, 'bar');
 
         _chai.assert.equal(token.right.operator.content, '>');
 
-        _chai.assert.instanceOf(token.right.right, models.Literal);
+        _chai.assert.instanceOf(token.right.right, _AstParser.Models.Literal);
         _chai.assert.equal(token.right.right.content, '4');
     });
 
@@ -363,28 +357,28 @@ describe('AstParser', function () {
         const token = program.body[0];
 
         _chai.assert.equal(program.body.length, 1);
-        _chai.assert.instanceOf(token, models.LogicalExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.LogicalExpression);
 
-        _chai.assert.instanceOf(token.left, models.BinaryExpression);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.BinaryExpression);
 
-        _chai.assert.instanceOf(token.left.left, models.MemberExpression);
+        _chai.assert.instanceOf(token.left.left, _AstParser.Models.MemberExpression);
         _chai.assert.equal(token.left.left.property.content, 'bar');
 
         _chai.assert.equal(token.left.operator.content, '!==');
 
-        _chai.assert.instanceOf(token.left.right, models.Keyword);
+        _chai.assert.instanceOf(token.left.right, _AstParser.Models.Keyword);
         _chai.assert.equal(token.left.right.content, 'null');
 
         _chai.assert.equal(token.operator.content, '&&');
 
-        _chai.assert.instanceOf(token.right, models.BinaryExpression);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.BinaryExpression);
 
-        _chai.assert.instanceOf(token.right.left, models.MemberExpression);
-        _chai.assert.instanceOf(token.right.left.object, models.Keyword);
+        _chai.assert.instanceOf(token.right.left, _AstParser.Models.MemberExpression);
+        _chai.assert.instanceOf(token.right.left.object, _AstParser.Models.Keyword);
 
         _chai.assert.equal(token.right.operator.content, '!==');
 
-        _chai.assert.instanceOf(token.right.right, models.Literal);
+        _chai.assert.instanceOf(token.right.right, _AstParser.Models.Literal);
         _chai.assert.equal(token.right.right.content, '');
     });
 
@@ -393,12 +387,12 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.LogicalExpression);
-        _chai.assert.instanceOf(token.left, models.LogicalExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.LogicalExpression);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.LogicalExpression);
 
         _chai.assert.equal(token.operator.content, '||');
 
-        _chai.assert.instanceOf(token.right, models.Identifier);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.Identifier);
     });
 
     it('should parse compound logical expressions according to parentheses placement', () => {
@@ -406,12 +400,12 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.LogicalExpression);
-        _chai.assert.instanceOf(token.left, models.Identifier);
+        _chai.assert.instanceOf(token, _AstParser.Models.LogicalExpression);
+        _chai.assert.instanceOf(token.left, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.operator.content, '&&');
 
-        _chai.assert.instanceOf(token.right, models.LogicalExpression);
+        _chai.assert.instanceOf(token.right, _AstParser.Models.LogicalExpression);
     });
 
     it('should recognise a call expression upon an identifier', () => {
@@ -419,8 +413,8 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.CallExpression);
-        _chai.assert.instanceOf(token.callee, models.Identifier);
+        _chai.assert.instanceOf(token, _AstParser.Models.CallExpression);
+        _chai.assert.instanceOf(token.callee, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.callee.content, 'foo');
         _chai.assert.equal(token.arguments.length, 0);
@@ -431,15 +425,15 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.CallExpression);
-        _chai.assert.instanceOf(token.callee, models.Identifier);
+        _chai.assert.instanceOf(token, _AstParser.Models.CallExpression);
+        _chai.assert.instanceOf(token.callee, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.callee.content, 'foo');
         _chai.assert.equal(token.arguments.length, 3);
 
-        _chai.assert.instanceOf(token.arguments[0], models.Identifier);
-        _chai.assert.instanceOf(token.arguments[1], models.Literal);
-        _chai.assert.instanceOf(token.arguments[2], models.Literal);
+        _chai.assert.instanceOf(token.arguments[0], _AstParser.Models.Identifier);
+        _chai.assert.instanceOf(token.arguments[1], _AstParser.Models.Literal);
+        _chai.assert.instanceOf(token.arguments[2], _AstParser.Models.Literal);
     });
 
     it('should recognise a call expression upon a member expression', () => {
@@ -447,18 +441,18 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.CallExpression);
-        _chai.assert.instanceOf(token.callee, models.MemberExpression);
-        _chai.assert.instanceOf(token.callee.object, models.Identifier);
+        _chai.assert.instanceOf(token, _AstParser.Models.CallExpression);
+        _chai.assert.instanceOf(token.callee, _AstParser.Models.MemberExpression);
+        _chai.assert.instanceOf(token.callee.object, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.callee.object.content, 'console');
 
-        _chai.assert.instanceOf(token.callee.property, models.Identifier);
+        _chai.assert.instanceOf(token.callee.property, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.callee.property.content, 'log');
         _chai.assert.equal(token.arguments.length, 1);
 
-        _chai.assert.instanceOf(token.arguments[0], models.Literal);
+        _chai.assert.instanceOf(token.arguments[0], _AstParser.Models.Literal);
     });
 
     it('should recognise a variable declaration with keyword `var`', () => {
@@ -466,15 +460,15 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.VariableDeclaration);
+        _chai.assert.instanceOf(token, _AstParser.Models.VariableDeclaration);
 
         _chai.assert.equal(token.kind, 'var');
 
-        _chai.assert.instanceOf(token.identifier, models.Identifier);
+        _chai.assert.instanceOf(token.identifier, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.identifier.content, 'foo');
 
-        _chai.assert.instanceOf(token.init, models.Literal);
+        _chai.assert.instanceOf(token.init, _AstParser.Models.Literal);
 
         _chai.assert.equal(token.init.content, 'bar');
     });
@@ -484,15 +478,15 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.VariableDeclaration);
+        _chai.assert.instanceOf(token, _AstParser.Models.VariableDeclaration);
 
         _chai.assert.equal(token.kind, 'const');
 
-        _chai.assert.instanceOf(token.identifier, models.Identifier);
+        _chai.assert.instanceOf(token.identifier, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.identifier.content, 'foo');
 
-        _chai.assert.instanceOf(token.init, models.Literal);
+        _chai.assert.instanceOf(token.init, _AstParser.Models.Literal);
 
         _chai.assert.equal(token.init.content, 'false');
     });
@@ -502,15 +496,15 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.VariableDeclaration);
+        _chai.assert.instanceOf(token, _AstParser.Models.VariableDeclaration);
 
         _chai.assert.equal(token.kind, 'let');
 
-        _chai.assert.instanceOf(token.identifier, models.Identifier);
+        _chai.assert.instanceOf(token.identifier, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.identifier.content, 'foo');
 
-        _chai.assert.instanceOf(token.init, models.Literal);
+        _chai.assert.instanceOf(token.init, _AstParser.Models.Literal);
 
         _chai.assert.equal(token.init.content, '10');
     });
@@ -520,7 +514,7 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.ReturnStatement);
+        _chai.assert.instanceOf(token, _AstParser.Models.ReturnStatement);
 
         _chai.assert.equal(token.argument, null);
     });
@@ -530,9 +524,9 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.ReturnStatement);
+        _chai.assert.instanceOf(token, _AstParser.Models.ReturnStatement);
 
-        _chai.assert.instanceOf(token.argument, models.Identifier);
+        _chai.assert.instanceOf(token.argument, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.argument.content, 'foo');
     });
@@ -542,8 +536,8 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.ReturnStatement);
-        _chai.assert.instanceOf(token.argument, models.LogicalExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.ReturnStatement);
+        _chai.assert.instanceOf(token.argument, _AstParser.Models.LogicalExpression);
     });
 
     it('should recognise a return statement with a binary expression as an argument', () => {
@@ -551,8 +545,8 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.ReturnStatement);
-        _chai.assert.instanceOf(token.argument, models.BinaryExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.ReturnStatement);
+        _chai.assert.instanceOf(token.argument, _AstParser.Models.BinaryExpression);
     });
 
     it('should recognise a return statement with a compound logical expression as an argument', () => {
@@ -561,13 +555,13 @@ describe('AstParser', function () {
         const token = program.body[0];
         const logicalExpression = token.argument;
 
-        _chai.assert.instanceOf(token, models.ReturnStatement);
-        _chai.assert.instanceOf(logicalExpression, models.LogicalExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.ReturnStatement);
+        _chai.assert.instanceOf(logicalExpression, _AstParser.Models.LogicalExpression);
 
-        _chai.assert.instanceOf(logicalExpression.left, models.LogicalExpression);
-        _chai.assert.instanceOf(logicalExpression.left.left, models.BinaryExpression);
-        _chai.assert.instanceOf(logicalExpression.left.right, models.MemberExpression);
-        _chai.assert.instanceOf(logicalExpression.right, models.MemberExpression);
+        _chai.assert.instanceOf(logicalExpression.left, _AstParser.Models.LogicalExpression);
+        _chai.assert.instanceOf(logicalExpression.left.left, _AstParser.Models.BinaryExpression);
+        _chai.assert.instanceOf(logicalExpression.left.right, _AstParser.Models.MemberExpression);
+        _chai.assert.instanceOf(logicalExpression.right, _AstParser.Models.MemberExpression);
     });
 
     it('should recognise a return statement with a unary expression as an argument', () => {
@@ -575,8 +569,8 @@ describe('AstParser', function () {
         const program = _AstParser2.default.parse(code);
         const token = program.body[0];
 
-        _chai.assert.instanceOf(token, models.ReturnStatement);
-        _chai.assert.instanceOf(token.argument, models.UnaryExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.ReturnStatement);
+        _chai.assert.instanceOf(token.argument, _AstParser.Models.UnaryExpression);
 
         _chai.assert.equal(token.argument.operator.content, '!');
     });
@@ -590,8 +584,8 @@ describe('AstParser', function () {
         const token = program.body[0];
         const blockBody = program.body[0].body;
 
-        _chai.assert.instanceOf(token, models.BlockStatement);
-        _chai.assert.instanceOf(blockBody[0], models.VariableDeclaration);
+        _chai.assert.instanceOf(token, _AstParser.Models.BlockStatement);
+        _chai.assert.instanceOf(blockBody[0], _AstParser.Models.VariableDeclaration);
     });
 
     it('should recognise an abstract block statement with multiple statements', () => {
@@ -605,9 +599,9 @@ describe('AstParser', function () {
         const token = program.body[0];
         const blockBody = program.body[0].body;
 
-        _chai.assert.instanceOf(token, models.BlockStatement);
-        _chai.assert.instanceOf(blockBody[0], models.VariableDeclaration);
-        _chai.assert.instanceOf(blockBody[1], models.ReturnStatement);
+        _chai.assert.instanceOf(token, _AstParser.Models.BlockStatement);
+        _chai.assert.instanceOf(blockBody[0], _AstParser.Models.VariableDeclaration);
+        _chai.assert.instanceOf(blockBody[1], _AstParser.Models.ReturnStatement);
     });
 
     it('should recognise a function declaration', () => {
@@ -621,13 +615,13 @@ describe('AstParser', function () {
         const token = program.body[0];
         const functionBody = token.body.body;
 
-        _chai.assert.instanceOf(token, models.FunctionDeclaration);
-        _chai.assert.instanceOf(token.identifier, models.Identifier);
+        _chai.assert.instanceOf(token, _AstParser.Models.FunctionDeclaration);
+        _chai.assert.instanceOf(token.identifier, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.params.length, 0);
 
-        _chai.assert.instanceOf(functionBody[0], models.VariableDeclaration);
-        _chai.assert.instanceOf(functionBody[1], models.ReturnStatement);
+        _chai.assert.instanceOf(functionBody[0], _AstParser.Models.VariableDeclaration);
+        _chai.assert.instanceOf(functionBody[1], _AstParser.Models.ReturnStatement);
     });
 
     it('should recognise a function declaration with one or more paramters', () => {
@@ -639,14 +633,14 @@ describe('AstParser', function () {
         const token = program.body[0];
         const functionBody = token.body.body;
 
-        _chai.assert.instanceOf(token, models.FunctionDeclaration);
-        _chai.assert.instanceOf(token.identifier, models.Identifier);
+        _chai.assert.instanceOf(token, _AstParser.Models.FunctionDeclaration);
+        _chai.assert.instanceOf(token.identifier, _AstParser.Models.Identifier);
 
         _chai.assert.equal(token.params.length, 2);
         _chai.assert.equal(token.params[0].content, 'x');
         _chai.assert.equal(token.params[1].content, 'y');
 
-        _chai.assert.instanceOf(functionBody[0], models.ReturnStatement);
+        _chai.assert.instanceOf(functionBody[0], _AstParser.Models.ReturnStatement);
     });
 
     it('should recognise an if statement with only a consequent', () => {
@@ -658,10 +652,10 @@ describe('AstParser', function () {
         const token = program.body[0];
         const consequent = token.consequent;
 
-        _chai.assert.instanceOf(token, models.IfStatement);
-        _chai.assert.instanceOf(token.test, models.BinaryExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.IfStatement);
+        _chai.assert.instanceOf(token.test, _AstParser.Models.BinaryExpression);
 
-        _chai.assert.instanceOf(consequent.body[0], models.ReturnStatement);
+        _chai.assert.instanceOf(consequent.body[0], _AstParser.Models.ReturnStatement);
     });
 
     it('should recognise an if statement with a single identifier as a test', () => {
@@ -673,10 +667,10 @@ describe('AstParser', function () {
         const token = program.body[0];
         const consequent = token.consequent;
 
-        _chai.assert.instanceOf(token, models.IfStatement);
-        _chai.assert.instanceOf(token.test, models.Identifier);
+        _chai.assert.instanceOf(token, _AstParser.Models.IfStatement);
+        _chai.assert.instanceOf(token.test, _AstParser.Models.Identifier);
 
-        _chai.assert.instanceOf(consequent.body[0], models.ReturnStatement);
+        _chai.assert.instanceOf(consequent.body[0], _AstParser.Models.ReturnStatement);
     });
 
     it('should recognise an if statement with a single member expression as a test', () => {
@@ -688,10 +682,10 @@ describe('AstParser', function () {
         const token = program.body[0];
         const consequent = token.consequent;
 
-        _chai.assert.instanceOf(token, models.IfStatement);
-        _chai.assert.instanceOf(token.test, models.MemberExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.IfStatement);
+        _chai.assert.instanceOf(token.test, _AstParser.Models.MemberExpression);
 
-        _chai.assert.instanceOf(consequent.body[0], models.ReturnStatement);
+        _chai.assert.instanceOf(consequent.body[0], _AstParser.Models.ReturnStatement);
     });
 
     it('should recognise an if statement with a consequent and alternate', () => {
@@ -706,11 +700,11 @@ describe('AstParser', function () {
         const consequent = token.consequent;
         const alternate = token.alternate;
 
-        _chai.assert.instanceOf(token, models.IfStatement);
-        _chai.assert.instanceOf(token.test, models.BinaryExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.IfStatement);
+        _chai.assert.instanceOf(token.test, _AstParser.Models.BinaryExpression);
 
-        _chai.assert.instanceOf(consequent.body[0], models.ReturnStatement);
-        _chai.assert.instanceOf(alternate.body[0], models.ReturnStatement);
+        _chai.assert.instanceOf(consequent.body[0], _AstParser.Models.ReturnStatement);
+        _chai.assert.instanceOf(alternate.body[0], _AstParser.Models.ReturnStatement);
     });
 
     it('should recognise an if statement with a nested if statement within the alternate', () => {
@@ -725,13 +719,13 @@ describe('AstParser', function () {
         const consequent = token.consequent;
         const alternate = token.alternate;
 
-        _chai.assert.instanceOf(token, models.IfStatement);
-        _chai.assert.instanceOf(token.test, models.BinaryExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.IfStatement);
+        _chai.assert.instanceOf(token.test, _AstParser.Models.BinaryExpression);
 
-        _chai.assert.instanceOf(consequent.body[0], models.ReturnStatement);
-        _chai.assert.instanceOf(alternate, models.IfStatement);
+        _chai.assert.instanceOf(consequent.body[0], _AstParser.Models.ReturnStatement);
+        _chai.assert.instanceOf(alternate, _AstParser.Models.IfStatement);
 
-        _chai.assert.instanceOf(alternate.consequent.body[0], models.ReturnStatement);
+        _chai.assert.instanceOf(alternate.consequent.body[0], _AstParser.Models.ReturnStatement);
         _chai.assert.equal(alternate.altenative, null);
     });
 
@@ -749,14 +743,14 @@ describe('AstParser', function () {
         const consequent = token.consequent;
         const alternate = token.alternate;
 
-        _chai.assert.instanceOf(token, models.IfStatement);
-        _chai.assert.instanceOf(token.test, models.BinaryExpression);
+        _chai.assert.instanceOf(token, _AstParser.Models.IfStatement);
+        _chai.assert.instanceOf(token.test, _AstParser.Models.BinaryExpression);
 
-        _chai.assert.instanceOf(consequent.body[0], models.ReturnStatement);
-        _chai.assert.instanceOf(alternate, models.IfStatement);
+        _chai.assert.instanceOf(consequent.body[0], _AstParser.Models.ReturnStatement);
+        _chai.assert.instanceOf(alternate, _AstParser.Models.IfStatement);
 
-        _chai.assert.instanceOf(alternate.consequent.body[0], models.ReturnStatement);
-        _chai.assert.instanceOf(alternate.alternate.body[0], models.ReturnStatement);
+        _chai.assert.instanceOf(alternate.consequent.body[0], _AstParser.Models.ReturnStatement);
+        _chai.assert.instanceOf(alternate.alternate.body[0], _AstParser.Models.ReturnStatement);
     });
 });
 //# sourceMappingURL=AstParser.tests.js.map

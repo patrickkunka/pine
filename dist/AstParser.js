@@ -3,6 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.Patterns = exports.Models = undefined;
 
 var _models = require('./models');
 
@@ -10,7 +11,7 @@ var Models = _interopRequireWildcard(_models);
 
 var _Patterns = require('./Patterns');
 
-var patterns = _interopRequireWildcard(_Patterns);
+var Patterns = _interopRequireWildcard(_Patterns);
 
 var _Util = require('./Util');
 
@@ -85,19 +86,19 @@ class AstParser {
 
         let match = null;
 
-        if (match = new RegExp(patterns.BOOLEAN).exec(slice)) {
+        if (match = new RegExp(Patterns.BOOLEAN).exec(slice)) {
             return _Mappings2.default.getLiteral(match, startIndex, 'boolean');
-        }if (match = new RegExp(patterns.NUMBER).exec(slice)) {
+        }if (match = new RegExp(Patterns.NUMBER).exec(slice)) {
             return _Mappings2.default.getLiteral(match, startIndex, 'number');
-        } else if (match = new RegExp(patterns.KEYWORD).exec(slice)) {
+        } else if (match = new RegExp(Patterns.KEYWORD).exec(slice)) {
             return _Mappings2.default.getKeyword(match, startIndex);
-        } else if (match = new RegExp(patterns.PUNCTUATOR).exec(slice)) {
+        } else if (match = new RegExp(Patterns.PUNCTUATOR).exec(slice)) {
             return _Mappings2.default.getPunctuator(match, startIndex);
-        } else if (match = new RegExp(patterns.STRING).exec(slice)) {
+        } else if (match = new RegExp(Patterns.STRING).exec(slice)) {
             return _Mappings2.default.getLiteral(match, startIndex, 'string');
-        } else if (match = new RegExp(patterns.IDENTIFIER).exec(slice)) {
+        } else if (match = new RegExp(Patterns.IDENTIFIER).exec(slice)) {
             return _Mappings2.default.getIdentifier(match, startIndex);
-        } else if (match = new RegExp(patterns.WHITESPACE).exec(slice)) {
+        } else if (match = new RegExp(Patterns.WHITESPACE).exec(slice)) {
             return _Mappings2.default.getWhitespace(match, startIndex);
         }
 
@@ -116,7 +117,7 @@ class AstParser {
 
             let Model = Models[_Util2.default.pascalCase(type)];
             let mapper = _Mappings2.default['map' + _Util2.default.pascalCase(type)];
-            let pattern = patterns[type];
+            let pattern = Patterns[type];
 
             AstParser.traverseTokens(tokens, Model, mapper, pattern, classInstance);
         }
@@ -180,8 +181,7 @@ class AstParser {
     }
 }
 
-AstParser.Models = Models;
-AstParser.Patterns = patterns;
-
+exports.Models = Models;
+exports.Patterns = Patterns;
 exports.default = AstParser;
 //# sourceMappingURL=AstParser.js.map

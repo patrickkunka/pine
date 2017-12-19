@@ -1,4 +1,4 @@
-import * as models   from './models';
+import * as Models   from './models';
 import * as patterns from './Patterns';
 import Util          from './Util';
 import Mappings      from './Mappings';
@@ -12,7 +12,7 @@ class AstParser {
      */
 
     static parse(programString, classInstance=null) {
-        const Program = new models.Program();
+        const Program = new Models.Program();
         const tokens = AstParser.ingestProgramString(programString);
 
         AstParser.parseTokensIntoAst(tokens, classInstance);
@@ -34,7 +34,7 @@ class AstParser {
         let token = null;
 
         while ((token = AstParser.matchToken(programString, startIndex))) {
-            if (!(token instanceof models.Whitespace)) {
+            if (!(token instanceof Models.Whitespace)) {
                 tokens.push(token);
             }
 
@@ -90,7 +90,7 @@ class AstParser {
         for (let i = 0, type; i < parsingOrder.length; i++) {
             type = parsingOrder[i];
 
-            let Model = models[Util.pascalCase(type)];
+            let Model = Models[Util.pascalCase(type)];
             let mapper = Mappings['map' + Util.pascalCase(type)];
             let pattern = patterns[type];
 
@@ -156,7 +156,7 @@ class AstParser {
     }
 }
 
-AstParser.Models   = models;
+AstParser.Models   = Models;
 AstParser.Patterns = patterns;
 
 export default AstParser;

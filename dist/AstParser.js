@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _models = require('./models');
 
-var models = _interopRequireWildcard(_models);
+var Models = _interopRequireWildcard(_models);
 
 var _Patterns = require('./Patterns');
 
@@ -36,7 +36,7 @@ class AstParser {
      */
 
     static parse(programString, classInstance = null) {
-        const Program = new models.Program();
+        const Program = new Models.Program();
         const tokens = AstParser.ingestProgramString(programString);
 
         AstParser.parseTokensIntoAst(tokens, classInstance);
@@ -58,7 +58,7 @@ class AstParser {
         let token = null;
 
         while (token = AstParser.matchToken(programString, startIndex)) {
-            if (!(token instanceof models.Whitespace)) {
+            if (!(token instanceof Models.Whitespace)) {
                 tokens.push(token);
             }
 
@@ -114,7 +114,7 @@ class AstParser {
         for (let i = 0, type; i < _parsingOrder2.default.length; i++) {
             type = _parsingOrder2.default[i];
 
-            let Model = models[_Util2.default.pascalCase(type)];
+            let Model = Models[_Util2.default.pascalCase(type)];
             let mapper = _Mappings2.default['map' + _Util2.default.pascalCase(type)];
             let pattern = patterns[type];
 
@@ -180,7 +180,7 @@ class AstParser {
     }
 }
 
-AstParser.Models = models;
+AstParser.Models = Models;
 AstParser.Patterns = patterns;
 
 exports.default = AstParser;

@@ -58,6 +58,15 @@ Object.defineProperty(exports, 'ClassMember', {
   }
 });
 
+var _Dependency = require('./Dependency.js');
+
+Object.defineProperty(exports, 'Dependency', {
+  enumerable: true,
+  get: function () {
+    return _interopRequireDefault(_Dependency).default;
+  }
+});
+
 var _CompoundPunctuator = require('./CompoundPunctuator.js');
 
 Object.defineProperty(exports, 'CompoundPunctuator', {
@@ -127,6 +136,15 @@ Object.defineProperty(exports, 'MemberExpression', {
   enumerable: true,
   get: function () {
     return _interopRequireDefault(_MemberExpression).default;
+  }
+});
+
+var _Namespace = require('./Namespace.js');
+
+Object.defineProperty(exports, 'Namespace', {
+  enumerable: true,
+  get: function () {
+    return _interopRequireDefault(_Namespace).default;
   }
 });
 

@@ -12,6 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 class Namespace extends _Program2.default {
     constructor() {
+        this.name = '';
         this.dependencies = [];
 
         Object.seal(this);

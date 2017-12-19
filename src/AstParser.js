@@ -156,5 +156,7 @@ class AstParser {
     }
 }
 
-export {Models, Patterns};
-export default AstParser;
+AstParser.Models = Models;
+AstParser.Patterns = Patterns;
+
+module.exports = AstParser;

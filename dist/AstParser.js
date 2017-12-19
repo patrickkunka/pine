@@ -1,10 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Patterns = exports.Models = undefined;
-
 var _models = require('./models');
 
 var Models = _interopRequireWildcard(_models);
@@ -181,7 +176,8 @@ class AstParser {
     }
 }
 
-exports.Models = Models;
-exports.Patterns = Patterns;
-exports.default = AstParser;
+AstParser.Models = Models;
+AstParser.Patterns = Patterns;
+
+module.exports = AstParser;
 //# sourceMappingURL=AstParser.js.map

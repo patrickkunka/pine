@@ -1,4 +1,4 @@
-import * as patterns from './patterns';
+import * as patterns from './Patterns';
 import * as models   from './models';
 
 import {

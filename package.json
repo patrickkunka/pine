@@ -1,12 +1,13 @@
 {
   "name": "pine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./dist/AstParser.js",
   "scripts": {
     "test": "mocha ./tests/unit.js",
     "babel": "babel src --out-dir dist --source-maps --copy-files --watch"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.18.0",
     "babel-preset-node7": "^1.4.0",
     "babel-register": "^6.18.0",

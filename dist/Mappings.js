@@ -4,9 +4,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _patterns = require('./patterns');
+var _Patterns = require('./Patterns');
 
-var patterns = _interopRequireWildcard(_patterns);
+var patterns = _interopRequireWildcard(_Patterns);
 
 var _models = require('./models');
 
